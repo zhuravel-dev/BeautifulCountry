@@ -22,7 +22,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/btOk"
+        android:id="@+id/first_button"
         android:layout_width="112dp"
         android:layout_height="52dp"
         android:text="Next"
