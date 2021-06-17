@@ -5,10 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 
 
-class FirstFragment : Fragment() {
+class SecondFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,7 +15,7 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_first, container, false)
+        val view = inflater.inflate(R.layout.fragment_second, container, false)
 
         return view
 
