@@ -5,31 +5,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studyprojectrnc.databinding.ItemViewBinding
 
-class CustomAdapter(private val values: List<String>) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+class CustomAdapter : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+    val itemList = ArrayList<List>()
 
-    class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textView: TextView? = null
-            init{
-                textView = itemView.findViewById(R.id.text_list_item)
-            }
-
+    class CustomViewHolder(item: View) : RecyclerView.ViewHolder(item) {
+        private val binding = ItemViewBinding.bind(item)
+        fun bind(list: List) = with(binding) {
+            tvTitle.text = list.title
+        }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): CustomViewHolder {
-
-        val itemView = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.list_item_view, viewGroup, false)
-
-        return CustomViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
+        return CustomViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: CustomViewHolder, position: Int) {
-
-        viewHolder.textView?.text = values[position]
-
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+        holder.bind(itemList[position])
     }
 
-    override fun getItemCount() = values.size
+    override fun getItemCount(): Int = itemList.size
 
+    fun addText(list: List) {
+        itemList.add(list)
+        notifyDataSetChanged()
+    }
 }
