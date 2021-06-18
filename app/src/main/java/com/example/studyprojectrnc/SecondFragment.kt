@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_second.view.*
 
-
 class SecondFragment : Fragment() {
-
     private val taskAdapter by lazy { CustomAdapter() }
 
     override fun onCreateView(
@@ -23,10 +21,9 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-      /*  view.rvCustom.apply {
+        view.rvView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = taskAdapter
-      */  }
-
-
+        }
     }
+}
