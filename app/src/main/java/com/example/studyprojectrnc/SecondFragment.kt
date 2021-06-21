@@ -2,28 +2,31 @@ package com.example.studyprojectrnc
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
+import com.example.studyprojectrnc.databinding.FragmentSecondBinding
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_second.view.*
 
-class SecondFragment : Fragment() {
-    private val taskAdapter by lazy { CustomAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+class SecondFragment : Fragment(R.layout.fragment_second) {
+    lateinit var viewBinding: FragmentSecondBinding
+    private val customAdapter by lazy { CustomAdapter() }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewBinding = FragmentSecondBinding.bind(view)
 
-        view.rvView.apply {
+        viewBinding.rvView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = taskAdapter
+            adapter = CustomAdapter()
         }
     }
 }
+
+
+

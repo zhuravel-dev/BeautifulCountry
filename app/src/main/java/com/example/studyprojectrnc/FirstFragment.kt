@@ -16,11 +16,10 @@ class FirstFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //return inflater.inflate(R.layout.fragment_first, container, false)
         val view = inflater.inflate(R.layout.fragment_first, container, false)
         communicator = activity as Communicator
         view.button.setOnClickListener {
-            communicator.passAndNavigateToSecondFragment(view.txtView.text.toString())
+            communicator.passAndNavigateToSecondFragment(view.tvWelcomeText.text.toString())
         }
         return view
     }

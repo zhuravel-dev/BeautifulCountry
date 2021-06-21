@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Study Project RnC</string>
-    <string name="hello_blank_fragment">Hello from first fragment!</string>
+    <string name="welcome">Hello! Today is:</string>
     <string name="button_next">Next</string>
-    <string name="button_time">Time</string>
+    <string name="splash">Loading…</string>
 </resources>
