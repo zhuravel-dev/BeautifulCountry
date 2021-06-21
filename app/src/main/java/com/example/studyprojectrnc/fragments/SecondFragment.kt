@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc
+package com.example.studyprojectrnc.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,18 @@ import com.example.studyprojectrnc.databinding.FragmentSecondBinding
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-
+import com.example.studyprojectrnc.R
+import com.example.studyprojectrnc.TitleAdapter
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
     lateinit var viewBinding: FragmentSecondBinding
-    private val customAdapter by lazy { CustomAdapter() }
+    private val customAdapter by lazy { TitleAdapter() }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
@@ -21,9 +26,9 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding = FragmentSecondBinding.bind(view)
 
-        viewBinding.rvView.apply {
+        viewBinding.rcView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = CustomAdapter()
+            adapter = customAdapter
         }
     }
 }

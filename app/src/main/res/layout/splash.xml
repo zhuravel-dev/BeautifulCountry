@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/splash_background"
-    tools:context=".SplashActivityOne">
+    tools:context=".activities.SplashActivity">
 
     <TextView
         android:id="@+id/tvSplash"
@@ -20,6 +20,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.47" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
