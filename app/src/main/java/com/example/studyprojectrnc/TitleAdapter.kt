@@ -17,12 +17,8 @@ class TitleAdapter : RecyclerView.Adapter<TitleAdapter.CustomViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CustomViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.title_view_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.title_view_item, parent, false)
         return CustomViewHolder(view)
     }
 
@@ -40,10 +36,10 @@ class TitleAdapter : RecyclerView.Adapter<TitleAdapter.CustomViewHolder>() {
     }
 }
 
-private class TitleDiffUtilCallback(
-    val newPersons: List<TitleData>,
-    val oldPersons: List<TitleData>
-) : DiffUtil.Callback() {
+    private class TitleDiffUtilCallback(
+        val newPersons: List<TitleData>,
+        val oldPersons: List<TitleData>
+    ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
         return oldPersons.size
