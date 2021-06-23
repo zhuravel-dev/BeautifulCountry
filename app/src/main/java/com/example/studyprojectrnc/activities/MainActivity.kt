@@ -25,8 +25,9 @@ class MainActivity : AppCompatActivity(), Communicator {
     override fun passAndNavigateToSecondFragment(txtView: String) {
         val bundle = Bundle()
         val transaction = this.supportFragmentManager.beginTransaction()
-        val secondFragment = SecondFragment()
-        secondFragment.arguments = bundle
+        val secondFragment = SecondFragment().apply {
+            arguments = bundle
+        }
 
         transaction.replace(R.id.fragment_container, secondFragment)
         transaction.addToBackStack(null)

@@ -39,8 +39,3 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
     fun String.toTitleData(index: Int): TitleData {
         return TitleData(index.toLong(), this)
     }
-
-
-
-
-

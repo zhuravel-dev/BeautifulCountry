@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.studyprojectrnc.Communicator
-import com.example.studyprojectrnc.R
-import kotlinx.android.synthetic.main.fragment_first.view.*
+import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
-
+    private lateinit var binding: FragmentFirstBinding
     private lateinit var communicator: Communicator
 
     override fun onCreateView(
@@ -18,10 +17,11 @@ class FirstFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_first, container, false)
+        binding = FragmentFirstBinding.inflate(inflater, container, false)
+        val view = binding.root
         communicator = activity as Communicator
-        view.button.setOnClickListener {
-            communicator.passAndNavigateToSecondFragment(view.tvWelcomeText.text.toString())
+        binding.btnNext.setOnClickListener {
+            communicator.passAndNavigateToSecondFragment(binding.tvWelcomeText.text.toString())
         }
         return view
     }

@@ -7,4 +7,5 @@
     <string name="error">Error</string>
     <string name="Successfully">Successfully!</string>
     <string name="Failed">Failed!</string>
+    <string name="Some_text">Some text</string>
 </resources>
