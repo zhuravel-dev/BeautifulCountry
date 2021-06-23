@@ -1,9 +1,10 @@
-package com.example.studyprojectrnc
-
+package com.example.studyprojectrnc.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.studyprojectrnc.Communicator
+import com.example.studyprojectrnc.fragments.FirstFragment
+import com.example.studyprojectrnc.R
+import com.example.studyprojectrnc.fragments.SecondFragment
 import com.example.studyprojectrnc.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), Communicator {
@@ -11,6 +12,7 @@ class MainActivity : AppCompatActivity(), Communicator {
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)

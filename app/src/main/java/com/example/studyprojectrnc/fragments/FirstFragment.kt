@@ -1,10 +1,12 @@
-package com.example.studyprojectrnc
+package com.example.studyprojectrnc.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.studyprojectrnc.Communicator
+import com.example.studyprojectrnc.R
 import kotlinx.android.synthetic.main.fragment_first.view.*
 
 class FirstFragment : Fragment() {
@@ -16,11 +18,10 @@ class FirstFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //return inflater.inflate(R.layout.fragment_first, container, false)
         val view = inflater.inflate(R.layout.fragment_first, container, false)
         communicator = activity as Communicator
         view.button.setOnClickListener {
-            communicator.passAndNavigateToSecondFragment(view.txtView.text.toString())
+            communicator.passAndNavigateToSecondFragment(view.tvWelcomeText.text.toString())
         }
         return view
     }
