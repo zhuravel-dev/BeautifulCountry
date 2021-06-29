@@ -32,7 +32,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
             layoutManager = LinearLayoutManager(context)
             adapter = customAdapter
         }
-        customAdapter.updateTitleData(mockData.mapIndexed { index, item -> item.toTitleData(index) })
+        //customAdapter.updateTitleData(mockData.mapIndexed { index, item -> item.toTitleData(index) })
     }
 }
 

@@ -28,15 +28,16 @@ class TitleAdapter : RecyclerView.Adapter<TitleAdapter.CustomViewHolder>() {
 
     override fun getItemCount(): Int = itemList.size
 
-    fun updateTitleData(data: List<TitleData>) {
+   /* fun updateTitleData(data: List<TitleData>) {
         val diffResult = DiffUtil.calculateDiff(TitleDiffUtilCallback(this.itemList, data))
         itemList.clear()
         itemList.addAll(data)
         diffResult.dispatchUpdatesTo(this)
     }
+    */
 }
 
-    private class TitleDiffUtilCallback(
+   /* private class TitleDiffUtilCallback(
         val newPersons: List<TitleData>,
         val oldPersons: List<TitleData>
     ) : DiffUtil.Callback() {
@@ -57,5 +58,5 @@ class TitleAdapter : RecyclerView.Adapter<TitleAdapter.CustomViewHolder>() {
         return oldPersons[oldItemPosition] == newPersons[newItemPosition]
     }
 }
-
+*/
 
