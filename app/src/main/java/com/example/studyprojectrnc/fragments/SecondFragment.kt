@@ -2,44 +2,26 @@ package com.example.studyprojectrnc.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.View
-import com.example.studyprojectrnc.databinding.FragmentSecondBinding
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.studyprojectrnc.R
-import com.example.studyprojectrnc.ImageAdapter
-import com.example.studyprojectrnc.ImagesService
-import com.example.studyprojectrnc.TitleData
-import com.example.studyprojectrnc.repository.model.Json4Kotlin_Base
+import com.example.studyprojectrnc.*
+import com.example.studyprojectrnc.databinding.FragmentSecondBinding
+import com.example.studyprojectrnc.repository.model.HitsDataList
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
+
+    lateinit var service: ImagesService
+
     lateinit var viewBinding: FragmentSecondBinding
+
     private val customAdapter by lazy { ImageAdapter() }
-    //private val mockData = listOf("Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6")
-    lateinit var service : ImagesService
+
     private val imageAdapter: ImageAdapter = ImageAdapter()
-
-    private fun getAllData() {
-        service.getContent()
-            .enqueue(object : Callback<Json4Kotlin_Base> {
-                override fun onFailure(call: Call<Json4Kotlin_Base>, t: Throwable) {
-                    Log.v("okhttp", t.message.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<Json4Kotlin_Base>,
-                    response: Response<Json4Kotlin_Base>
-                ) {
-                    Log.v("okhttp", response.toString())
-                    imageAdapter.addData(response.body()?.images)
-                }
-            })
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,10 +39,29 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
             layoutManager = LinearLayoutManager(context)
             adapter = customAdapter
         }
-       // customAdapter.updateTitleData(mockData.mapIndexed { index, item -> item.toTitleData(index) })
+        service =
+            RetrofitClientInstance.getRetrofitInstance().create(ImagesService::class.java)
+        getAllData()
+        // customAdapter.updateTitleData(mockData.mapIndexed { index, item -> item.toTitleData(index) })
     }
-}
 
-    fun String.toTitleData(index: Int): TitleData {
-        return TitleData(index.toLong(), this)
+    private fun getAllData() {
+        service.getContent()
+            .enqueue(object : retrofit2.Callback<HitsDataList> {
+                override fun onResponse(
+                    call: Call<HitsDataList>,
+                    response: Response<HitsDataList>
+                ) {
+                    Log.v("okhttp", response.toString())
+                   val data =  response.body()?.images ?: arrayListOf()
+//                    imageAdapter.updateTitleData(data)
+                    imageAdapter.addData(data)
+                }
+
+                override fun onFailure(call: Call<HitsDataList>, t: Throwable) {
+                    Log.v("okhttp", t.message.toString())
+                }
+            })
     }
+
+}

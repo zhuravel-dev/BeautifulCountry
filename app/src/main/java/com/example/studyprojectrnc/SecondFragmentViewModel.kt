@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.studyprojectrnc.repository.model.Hits
-import com.example.studyprojectrnc.repository.model.Json4Kotlin_Base
+import com.example.studyprojectrnc.repository.model.HitsDataList
 import retrofit2.Call
 
 class SecondFragmentViewModel : ViewModel() {
@@ -16,7 +16,7 @@ class SecondFragmentViewModel : ViewModel() {
     fun getAllData() {
         _showProgress.postValue(true)
         val service = RetrofitClientInstance.getRetrofitInstance().create(ImagesService::class.java)
-        val call: Call<Json4Kotlin_Base> = service.getContent()
+        val call: Call<HitsDataList> = service.getContent()
         //call.enqueue()
         _showProgress.postValue(false)
     }

@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_second.*
 
 class MainActivity : AppCompatActivity(), Communicator {
 
-        private val manager = supportFragmentManager
+//        private val manager = supportFragmentManager
         lateinit var binding: ActivityMainBinding
         private var progressBar: ProgressBar? = null
         private var viewModel: SecondFragmentViewModel? = null
@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity(), Communicator {
         override fun onCreate(savedInstanceState: Bundle?) {
             setTheme(R.style.AppTheme)
             super.onCreate(savedInstanceState)
-            Realm.init(this)
-            val config = RealmConfiguration.Builder().name("myrealm.realm").build()
-            Realm.setDefaultConfiguration(config)
-            binding = ActivityMainBinding.inflate(layoutInflater)
+//            Realm.init(this)
+//            val config = RealmConfiguration.Builder().name("myrealm.realm").build()
+//            Realm.setDefaultConfiguration(config)
+//            binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(R.layout.activity_main)
-            binding = ActivityMainBinding.bind(pbView)
+//            binding = ActivityMainBinding.bind(pbView)
 
             val firstFragment = FirstFragment()
             supportFragmentManager.beginTransaction()
