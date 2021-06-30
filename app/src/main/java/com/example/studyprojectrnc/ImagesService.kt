@@ -1,5 +1,7 @@
 package com.example.studyprojectrnc
 
+import android.icu.text.IDNA
+import com.example.studyprojectrnc.repository.model.Json4Kotlin_Base
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,5 +12,6 @@ interface ImagesService {
         @Query("key") key: String = "22281764-aa17ceed19bc1ed0ef2893c10",
         @Query("q") q: String = "forest",
         @Query("image_type") imageType: String = "photo"
-    ): Call<SealedImage>
+    ): Call<Json4Kotlin_Base>
 }
+

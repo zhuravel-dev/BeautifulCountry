@@ -3,43 +3,54 @@ package com.example.studyprojectrnc
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studyprojectrnc.databinding.TitleViewItemBinding
+import com.example.studyprojectrnc.repository.model.Hits
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.title_view_item.view.*
+import java.util.Collections.addAll
 
-class TitleAdapter : RecyclerView.Adapter<TitleAdapter.CustomViewHolder>() {
-    private val itemList = ArrayList<TitleData>()
+class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+    private val itemList = ArrayList<Hits>()
 
-    class CustomViewHolder(item: View) : RecyclerView.ViewHolder(item) {
+    class ImageViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         private val binding = TitleViewItemBinding.bind(item)
-        fun bind(titleData: TitleData) = with(binding) {
-            tvTitle.text = titleData.title
-        }
+        val image: ImageView = itemView.ivImage
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.title_view_item, parent, false)
-        return CustomViewHolder(view)
+        return ImageViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(itemList[position])
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        Picasso.get().load(itemList[position].webformatURL).into(holder.image)
+
     }
 
     override fun getItemCount(): Int = itemList.size
 
-   /* fun updateTitleData(data: List<TitleData>) {
+    fun addData(images:List<Hits>?) {
+        itemList.apply {
+            clear()
+            addAll(images ?: arrayListOf())
+        }
+        notifyDataSetChanged()
+    }
+
+   fun updateTitleData(data: List<Hits>) {
         val diffResult = DiffUtil.calculateDiff(TitleDiffUtilCallback(this.itemList, data))
         itemList.clear()
         itemList.addAll(data)
         diffResult.dispatchUpdatesTo(this)
     }
-    */
 }
 
-   /* private class TitleDiffUtilCallback(
-        val newPersons: List<TitleData>,
-        val oldPersons: List<TitleData>
+   private class TitleDiffUtilCallback(
+        val newPersons: List<Hits>,
+        val oldPersons: List<Hits>
     ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
@@ -58,5 +69,5 @@ class TitleAdapter : RecyclerView.Adapter<TitleAdapter.CustomViewHolder>() {
         return oldPersons[oldItemPosition] == newPersons[newItemPosition]
     }
 }
-*/
+
 
