@@ -21,8 +21,6 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
 
     private val customAdapter by lazy { ImageAdapter() }
 
-    private val imageAdapter: ImageAdapter = ImageAdapter()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,7 +40,6 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         service =
             RetrofitClientInstance.getRetrofitInstance().create(ImagesService::class.java)
         getAllData()
-        // customAdapter.updateTitleData(mockData.mapIndexed { index, item -> item.toTitleData(index) })
     }
 
     private fun getAllData() {
@@ -53,9 +50,8 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
                     response: Response<HitsDataList>
                 ) {
                     Log.v("okhttp", response.toString())
-                   val data =  response.body()?.images ?: arrayListOf()
-//                    imageAdapter.updateTitleData(data)
-                    imageAdapter.addData(data)
+                    val data = response.body()?.images ?: arrayListOf()
+                    customAdapter.updateTitleData(data)
                 }
 
                 override fun onFailure(call: Call<HitsDataList>, t: Throwable) {
