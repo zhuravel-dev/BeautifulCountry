@@ -3,7 +3,6 @@ package com.example.studyprojectrnc.repository.model
 import com.google.gson.annotations.SerializedName
 
 data class Hits (
-
 	@SerializedName("id") val id : Int,
 	@SerializedName("pageURL") val pageURL : String,
 	@SerializedName("type") val type : String,
@@ -27,5 +26,4 @@ data class Hits (
 	@SerializedName("user_id") val user_id : Int,
 	@SerializedName("user") val user : String,
 	@SerializedName("userImageURL") val userImageURL : String
-
 )
