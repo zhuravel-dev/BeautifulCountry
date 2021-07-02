@@ -10,8 +10,7 @@ import com.example.studyprojectrnc.fragments.FirstFragment
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.fragments.SecondFragment
 import com.example.studyprojectrnc.databinding.ActivityMainBinding
-import com.example.studyprojectrnc.db.RealmObject
-import io.realm.Realm
+import com.example.studyprojectrnc.db.ModelRealm
 
 
 class MainActivity : AppCompatActivity(), Communicator {
@@ -19,11 +18,11 @@ class MainActivity : AppCompatActivity(), Communicator {
     lateinit var binding: ActivityMainBinding
     private var progressBar: ProgressBar? = null
     private var viewModel: SecondFragmentViewModel? = null
+    private var list: List<ModelRealm>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        Realm.init(this)
 
 //      binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
@@ -36,6 +35,7 @@ class MainActivity : AppCompatActivity(), Communicator {
 
         viewModel = ViewModelProvider(this).get(SecondFragmentViewModel::class.java)
         viewModel?.getData()
+        viewModel?.models?.observe(this, { list = it })
     }
 
     override fun passAndNavigateToSecondFragment(txtView: String) {
@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity(), Communicator {
         transaction.replace(R.id.fragment_container, secondFragment)
         transaction.addToBackStack(null)
         transaction.commit()
+
+        list?.let(secondFragment::updateAdapter)
     }
 }
 

@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studyprojectrnc.repository.model.Hits
+import com.example.studyprojectrnc.db.ModelRealm
 import com.squareup.picasso.Picasso
 
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
-    private val itemList = mutableListOf<Hits>()
+    private val itemList = mutableListOf<ModelRealm>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivImage: ImageView = view.findViewById(R.id.ivImage)
@@ -30,7 +30,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
     override fun getItemCount() = itemList.size
 
-    fun addData(images: List<Hits>?) {
+    fun addData(images: List<ModelRealm>?) {
         itemList.apply {
             clear()
             addAll(images ?: arrayListOf())
@@ -38,7 +38,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun updateTitleData(data: List<Hits>) {
+    fun updateTitleData(data: List<ModelRealm>) {
         val diffResult = DiffUtil.calculateDiff(TitleDiffUtilCallback(this.itemList, data))
         itemList.clear()
         itemList.addAll(data)
@@ -47,8 +47,8 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 }
  //TODO rename
 private class TitleDiffUtilCallback(
-    val newPersons: List<Hits>,
-    val oldPersons: List<Hits>,
+     val newPersons: List<ModelRealm>,
+     val oldPersons: List<ModelRealm>,
 ) : DiffUtil.Callback() {
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
@@ -56,7 +56,7 @@ private class TitleDiffUtilCallback(
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldPersons[oldItemPosition].id == newPersons[newItemPosition].id
+        return oldPersons[oldItemPosition].num == newPersons[newItemPosition].num
     }
 
     override fun getNewListSize(): Int {

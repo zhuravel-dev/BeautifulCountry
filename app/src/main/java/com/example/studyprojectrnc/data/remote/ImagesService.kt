@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc
+package com.example.studyprojectrnc.data.remote
 
 import com.example.studyprojectrnc.repository.model.HitsDataList
 import retrofit2.Call
