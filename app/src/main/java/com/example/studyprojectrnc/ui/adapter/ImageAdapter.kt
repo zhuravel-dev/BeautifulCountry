@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studyprojectrnc.db.ModelRealm
+import com.example.studyprojectrnc.data.db.ModelRealm
 import com.squareup.picasso.Picasso
 
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
@@ -39,16 +39,16 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
     }
 
     fun updateTitleData(data: List<ModelRealm>) {
-        val diffResult = DiffUtil.calculateDiff(TitleDiffUtilCallback(this.itemList, data))
+        val diffResult = DiffUtil.calculateDiff(ImageDiffUtilCallback(this.itemList, data))
         itemList.clear()
         itemList.addAll(data)
         diffResult.dispatchUpdatesTo(this)
     }
 }
- //TODO rename
-private class TitleDiffUtilCallback(
-     val newPersons: List<ModelRealm>,
-     val oldPersons: List<ModelRealm>,
+
+private class ImageDiffUtilCallback(
+    val newPersons: List<ModelRealm>,
+    val oldPersons: List<ModelRealm>,
 ) : DiffUtil.Callback() {
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
@@ -66,7 +66,6 @@ private class TitleDiffUtilCallback(
     override fun getOldListSize(): Int {
         return oldPersons.size
     }
-
 }
 
 

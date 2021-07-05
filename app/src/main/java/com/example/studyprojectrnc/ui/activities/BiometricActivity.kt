@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.activities
+package com.example.studyprojectrnc.ui.activities
 
 import android.content.Intent
 import android.os.Bundle

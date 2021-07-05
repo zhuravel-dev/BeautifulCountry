@@ -1,16 +1,16 @@
-package com.example.studyprojectrnc.activities
+package com.example.studyprojectrnc.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
-import com.example.studyprojectrnc.Communicator
-import com.example.studyprojectrnc.SecondFragmentViewModel
-import com.example.studyprojectrnc.fragments.FirstFragment
+import com.example.studyprojectrnc.ui.fragments.Communicator
+import com.example.studyprojectrnc.ui.viewModel.SecondFragmentViewModel
+import com.example.studyprojectrnc.ui.fragments.FirstFragment
 import com.example.studyprojectrnc.R
-import com.example.studyprojectrnc.fragments.SecondFragment
+import com.example.studyprojectrnc.ui.fragments.SecondFragment
 import com.example.studyprojectrnc.databinding.ActivityMainBinding
-import com.example.studyprojectrnc.db.ModelRealm
+import com.example.studyprojectrnc.data.db.ModelRealm
 
 
 class MainActivity : AppCompatActivity(), Communicator {

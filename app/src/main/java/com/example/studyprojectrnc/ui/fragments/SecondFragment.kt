@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.fragments
+package com.example.studyprojectrnc.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studyprojectrnc.*
 import com.example.studyprojectrnc.databinding.FragmentSecondBinding
-import com.example.studyprojectrnc.db.ModelRealm
+import com.example.studyprojectrnc.data.db.ModelRealm
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
 

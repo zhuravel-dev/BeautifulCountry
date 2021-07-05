@@ -1,10 +1,10 @@
-package com.example.studyprojectrnc
+package com.example.studyprojectrnc.ui.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.studyprojectrnc.data.ImagesRepository
-import com.example.studyprojectrnc.db.ModelRealm
+import com.example.studyprojectrnc.data.repository.ImagesRepository
+import com.example.studyprojectrnc.data.db.ModelRealm
 
 class SecondFragmentViewModel : ViewModel() {
 

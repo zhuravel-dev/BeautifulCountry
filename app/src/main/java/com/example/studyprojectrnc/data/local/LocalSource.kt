@@ -1,6 +1,6 @@
 package com.example.studyprojectrnc.data.local
 
-import com.example.studyprojectrnc.db.ModelRealm
+import com.example.studyprojectrnc.data.db.ModelRealm
 import com.example.studyprojectrnc.repository.model.Hits
 import io.realm.Realm
 
@@ -10,7 +10,7 @@ class LocalSource {
         Realm.getDefaultInstance()
     }
 
-    fun getRealmObjects(): List<ModelRealm> =
+    private fun getRealmObjects(): List<ModelRealm> =
         realm.where(ModelRealm::class.java).findAll()
 
     fun saveData(models: List<Hits>?, callback: (List<ModelRealm>) -> Unit) {
@@ -23,9 +23,5 @@ class LocalSource {
             { callback.invoke(getRealmObjects()) },
             { callback.invoke(getRealmObjects()) }
         )
-    }
-
-    fun onCleared() {
-        realm.close()
     }
 }

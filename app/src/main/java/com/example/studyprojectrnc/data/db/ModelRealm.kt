@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.db
+package com.example.studyprojectrnc.data.db
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 

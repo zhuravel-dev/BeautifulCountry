@@ -1,9 +1,9 @@
-package com.example.studyprojectrnc.data
+package com.example.studyprojectrnc.data.repository
 
-import com.example.studyprojectrnc.data.remote.ImagesService
-import com.example.studyprojectrnc.data.remote.RetrofitClientInstance
+import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofit
+import com.example.studyprojectrnc.data.retrofit.RetrofitClientInstance
 import com.example.studyprojectrnc.data.local.LocalSource
-import com.example.studyprojectrnc.db.ModelRealm
+import com.example.studyprojectrnc.data.db.ModelRealm
 import com.example.studyprojectrnc.repository.model.HitsDataList
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,7 +13,7 @@ import java.util.concurrent.Executors
 class ImagesRepository {
 
     private val localSource = LocalSource()
-    private val remoteSource = RetrofitClientInstance.getRetrofitInstance().create(ImagesService::class.java)
+    private val remoteSource = RetrofitClientInstance.getRetrofitInstance().create(ImagesServiceRetrofit::class.java)
     private val execService = Executors.newSingleThreadExecutor()
 
     fun getDataFromRemoteAndSaveToLocal(q: String, callback: (List<ModelRealm>) -> Unit) {
