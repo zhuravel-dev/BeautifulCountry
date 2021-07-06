@@ -24,9 +24,7 @@ class MainActivity : AppCompatActivity(), Communicator {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-//      binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
-//      binding = ActivityMainBinding.bind(pbView)
 
         val firstFragment = FirstFragment()
         supportFragmentManager.beginTransaction()

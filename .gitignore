@@ -7,3 +7,8 @@
 /captures
 .externalNativeBuild
 .cxx
+.idea
+.idea/misc
+.idea/runConfigurations
+.idea/jarRepositories
+.idea/vcs
