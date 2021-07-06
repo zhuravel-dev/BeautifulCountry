@@ -4,19 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.studyprojectrnc.data.repository.ImagesRepository
-import com.example.studyprojectrnc.data.db.ModelRealm
+import com.example.studyprojectrnc.data.db.ModelImageRealm
 
 class SecondFragmentViewModel : ViewModel() {
 
-
     private val repository = ImagesRepository()
-
 
     private val _showProgress = MutableLiveData<Boolean>()
     val showProgress: LiveData<Boolean> = _showProgress
 
-    private val _models = MutableLiveData<List<ModelRealm>>()
-    val models: LiveData<List<ModelRealm>> = _models
+    private val _models = MutableLiveData<List<ModelImageRealm>>()
+    val models: LiveData<List<ModelImageRealm>> = _models
 
 
     fun getData(query: String = "forest") {

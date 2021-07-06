@@ -1,8 +1,11 @@
 package com.example.studyprojectrnc.data.local
 
-import com.example.studyprojectrnc.data.db.ModelRealm
+import android.location.Location
+import com.example.studyprojectrnc.data.db.ModelImageRealm
+import com.example.studyprojectrnc.data.db.ModelLocationRealm
 import com.example.studyprojectrnc.repository.model.Hits
 import io.realm.Realm
+import java.util.concurrent.Executors
 
 class LocalSource {
 
@@ -10,18 +13,37 @@ class LocalSource {
         Realm.getDefaultInstance()
     }
 
-    private fun getRealmObjects(): List<ModelRealm> =
-        realm.where(ModelRealm::class.java).findAll()
+    private val execService = Executors.newSingleThreadExecutor()
 
-    fun saveData(models: List<Hits>?, callback: (List<ModelRealm>) -> Unit) {
+    private fun getImageRealmObjects(): List<ModelImageRealm> =
+        realm.where(ModelImageRealm::class.java).findAll()
+
+    fun saveImageRealmObjects(models: List<Hits>?, callback: (List<ModelImageRealm>) -> Unit) {
         realm.executeTransactionAsync(
             { realm ->
                 models?.map {
-                    ModelRealm(it.id, it.largeImageURL)
+                    ModelImageRealm(it.id, it.largeImageURL)
                 }?.let(realm::copyToRealm)
             },
-            { callback.invoke(getRealmObjects()) },
-            { callback.invoke(getRealmObjects()) }
+            { callback.invoke(getImageRealmObjects()) },
+            { callback.invoke(getImageRealmObjects()) }
         )
     }
+
+    fun saveLocationRealm(location: Location) {
+        execService.submit {
+        realm.executeTransactionAsync { realm ->
+            ModelLocationRealm(location.latitude, location.longitude, location.altitude)
+                .let(realm::copyToRealm)
+        }}
+    }
+
+    fun getLocationRealm(): List<Location> =
+        realm.where(ModelLocationRealm::class.java).findAll().map { it.run {
+            Location("Realm").apply {
+                latitude = it.latitude
+                longitude = it.longitude
+                altitude = it.altitude
+            }
+        } }
 }
