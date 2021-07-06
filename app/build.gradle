@@ -2,9 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     viewBinding {
@@ -19,17 +21,22 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+
     defaultConfig {
         applicationId "com.example.studyprojectrnc"
         minSdkVersion 23
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "key", "\"22281764-aa17ceed19bc1ed0ef2893c10\""
+        buildConfigField "String", "q", "\"forest\""
+        buildConfigField "String", "imageType", "\"photo\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -37,8 +44,15 @@ android {
     }
 }
 
+realm {
+    syncEnabled = true
+}
+
 dependencies {
-    kapt "com.android.databinding:compiler:3.1.4"
+    implementation "com.squareup.picasso:picasso:2.71828"
+    implementation "com.squareup.retrofit2:converter-gson:2.5.0"
+    implementation "com.squareup.retrofit2:retrofit:2.5.0"
+    implementation "androidx.biometric:biometric:1.1.0"
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
