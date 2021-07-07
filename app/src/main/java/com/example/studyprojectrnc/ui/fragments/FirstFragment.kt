@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 import com.example.studyprojectrnc.ui.viewModel.FirstFragmentViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -60,12 +61,11 @@ class FirstFragment : Fragment() {
         when (requestCode) {
             LOCATION_PERMISSION_REQUEST_CODE -> {
                 if (grantResults.permissionsGranted()) viewModel?.trackLocation()
-                else {
+                else
                     if (needShowLocationRationale && isExplanationDialogAlreadyShow.not()) {
                         isExplanationDialogAlreadyShow = true
                         showPermissionExplanationDialog(LOCATION_PERMISSION_REQUEST_CODE)
                     } else showNeedPermissionSnackbar(binding.root)
-                }
             }
         }
     }
@@ -122,9 +122,9 @@ class FirstFragment : Fragment() {
 
     private fun showNeedPermissionSnackbar(anchorView: View) {
         Snackbar.make(
-            anchorView, "Enable location",
+            anchorView, getString(R.string.Enable_Location),
             Snackbar.LENGTH_LONG
-        ).setAction("Settings") {
+        ).setAction(getString(R.string.Settings)) {
             try {
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 intent.data = Uri.parse("package:" + requireActivity().application.packageName)
@@ -138,14 +138,13 @@ class FirstFragment : Fragment() {
 
     private fun showPermissionExplanationDialog(requestCode: Int) {
         AlertDialog.Builder(requireContext())
-            .setTitle("Enable Location")
-            .setMessage("Your Locations Settings is set to \\\"Off\\\". Please enable location to use this app.")
-            .setPositiveButton("OK") { _, _ ->
+            .setTitle(getString(R.string.Enable_Location))
+            .setMessage(getString(R.string.Message))
+            .setPositiveButton(getString(R.string.PositiveButton)) { _, _ ->
                 requestLocationPermission(requestCode)
             }
             .show()
     }
-
 
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 1003

@@ -8,4 +8,8 @@
     <string name="Successfully">Successfully!</string>
     <string name="Failed">Failed!</string>
     <string name="Some_text">Some text</string>
+    <string name="Enable_Location">Enable Location</string>
+    <string name="Message">Your Locations Settings is set to \\\"Off\\\". Please enable location to use this app.</string>
+    <string name="PositiveButton">OK</string>
+    <string name="Settings">Settings</string>
 </resources>
