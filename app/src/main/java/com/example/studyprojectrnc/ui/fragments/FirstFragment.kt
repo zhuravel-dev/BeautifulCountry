@@ -1,7 +1,6 @@
 package com.example.studyprojectrnc.ui.fragments
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,20 +11,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import com.example.studyprojectrnc.LocationService
 import com.example.studyprojectrnc.R
+import com.example.studyprojectrnc.TrackLocationWorker
+import com.example.studyprojectrnc.Util
 import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 import com.example.studyprojectrnc.ui.viewModel.FirstFragmentViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
+import java.util.concurrent.TimeUnit
 
 class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
     private lateinit var communicator: Communicator
     private var viewModel: FirstFragmentViewModel? = null
+    private lateinit var mServiceIntent: Intent
+    private var mLocationService: LocationService = LocationService()
 
     private var fusedLocationClient: FusedLocationProviderClient? = null
     private var needShowLocationRationale: Boolean = false
@@ -48,8 +57,47 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(FirstFragmentViewModel::class.java)
+        viewModel?.initRepo(requireContext())
         initLocationServices()
-        startLocationUpdates()
+
+        mServiceIntent = Intent(requireContext(), mLocationService.javaClass)
+        if (!Util.isMyServiceRunning(mLocationService.javaClass, this.requireActivity())) {
+            requireActivity().startService(mServiceIntent)
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.start_successfully),
+                Toast.LENGTH_SHORT
+            ).show()
+            viewModel?.fetchAllLocation()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.service_running),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+       // startLocationUpdates()
+        trackLocation()
+    }
+
+    private fun trackLocation() {
+        val locationWorker =
+            PeriodicWorkRequestBuilder<TrackLocationWorker>(
+                15, TimeUnit.SECONDS)
+                .addTag(FirstFragmentViewModel.LOCATION_WORK_TAG)
+                .build()
+        subscribeToViewModel()
+        WorkManager
+            .getInstance()
+            .enqueueUniquePeriodicWork(
+                FirstFragmentViewModel.LOCATION_WORK_TAG,
+                ExistingPeriodicWorkPolicy.KEEP,
+                locationWorker
+            )
+    }
+
+    private fun subscribeToViewModel() {
+        viewModel?.getLocation()
     }
 
     override fun onRequestPermissionsResult(
@@ -60,7 +108,7 @@ class FirstFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             LOCATION_PERMISSION_REQUEST_CODE -> {
-                if (grantResults.permissionsGranted()) viewModel?.trackLocation()
+                if (grantResults.permissionsGranted())trackLocation()
                 else
                     if (needShowLocationRationale && isExplanationDialogAlreadyShow.not()) {
                         isExplanationDialogAlreadyShow = true
@@ -87,12 +135,12 @@ class FirstFragment : Fragment() {
         } else onPermissionGranted()
     }
 
-    @SuppressLint("MissingPermission")
+ /*   @SuppressLint("MissingPermission")
     private fun startLocationUpdates() {
         checkLocationPermission {
             viewModel?.trackLocation()
         }
-    }
+    }*/
 
     private fun locationIsNotGranted() = ContextCompat.checkSelfPermission(
         requireContext(),

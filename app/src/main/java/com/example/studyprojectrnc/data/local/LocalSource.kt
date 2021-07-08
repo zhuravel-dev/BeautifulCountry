@@ -1,8 +1,8 @@
 package com.example.studyprojectrnc.data.local
 
 import android.location.Location
-import com.example.studyprojectrnc.data.db.ModelImageRealm
-import com.example.studyprojectrnc.data.db.ModelLocationRealm
+import com.example.studyprojectrnc.data.realmforImage.ModelImageRealm
+import com.example.studyprojectrnc.data.realmforImage.ModelLocationRealm
 import com.example.studyprojectrnc.repository.model.Hits
 import io.realm.Realm
 import java.util.concurrent.Executors

@@ -3,7 +3,7 @@ package com.example.studyprojectrnc.data.repository
 import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofit
 import com.example.studyprojectrnc.data.retrofit.RetrofitClientInstance
 import com.example.studyprojectrnc.data.local.LocalSource
-import com.example.studyprojectrnc.data.db.ModelImageRealm
+import com.example.studyprojectrnc.data.realmforImage.ModelImageRealm
 import com.example.studyprojectrnc.repository.model.HitsDataList
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,41 +1,50 @@
 package com.example.studyprojectrnc.data.repository
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
-import android.util.Log
-import com.example.studyprojectrnc.data.db.ModelLocationRealm
+import androidx.lifecycle.LiveData
+import com.example.studyprojectrnc.LocationService
 import com.example.studyprojectrnc.data.local.LocalSource
+import com.example.studyprojectrnc.data.roomForLocation.RoomDB
+import com.example.studyprojectrnc.data.roomForLocation.Entity
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import io.realm.Realm
 import java.util.concurrent.Executors
 
-class LocationRepository(private val locationClient: FusedLocationProviderClient) {
+class LocationRepository(val database: RoomDB) {
 
     private val localSource = LocalSource()
     private val execService = Executors.newSingleThreadExecutor()
-    private val realm: Realm = run {
+    private var myLocationService: LocationService = LocationService()
+    /*  private val realm: Realm = run {
         Realm.getDefaultInstance()
     }
-
-    @SuppressLint("MissingPermission")
+*/
+    /*   @SuppressLint("MissingPermission")
     fun getLocation() {
         locationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 location?.let(localSource::saveLocationRealm)
-                startLocationUpdates()
-                location?.also { setLocationData(it) }
+              startLocationUpdates()
+              location?.also { setLocationData(it) }
                 Log.i("LocationRepository", "location saved $location")
             }
         getLocationRealm()
     }
+  */
 
-    fun getLocationRealm(): List<Location> =
+    fun fetchLocation() {
+        database.locationDao()
+            .insertLocation(
+                Entity(
+                    latitude = myLocationService.latitude,
+                    longitude = myLocationService.longitude,
+                    altitude = myLocationService.altitude
+                )
+            )
+    }
+
+    fun getLocationLiveData(): LiveData<Entity> = database.locationDao().getLocationDetails()
+}
+
+/*  fun getLocationRealm(): List<Location> =
         realm.where(ModelLocationRealm::class.java).findAll().map {
             it.run {
                 Location("Realm").apply {
@@ -80,3 +89,4 @@ class LocationRepository(private val locationClient: FusedLocationProviderClient
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 }
+*/

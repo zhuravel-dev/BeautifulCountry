@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.studyprojectrnc.data.repository.ImagesRepository
-import com.example.studyprojectrnc.data.db.ModelImageRealm
+import com.example.studyprojectrnc.data.realmforImage.ModelImageRealm
 
 class SecondFragmentViewModel : ViewModel() {
 
