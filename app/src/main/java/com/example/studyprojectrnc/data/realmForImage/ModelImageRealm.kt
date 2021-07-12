@@ -1,8 +1,7 @@
-package com.example.studyprojectrnc.data.db
+package com.example.studyprojectrnc.data.realmForImage
 import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
 
-open class ModelRealm (
+open class ModelImageRealm (
     var num : Int = 0,
     var largeImageURL : String? = null
 ) : RealmObject()

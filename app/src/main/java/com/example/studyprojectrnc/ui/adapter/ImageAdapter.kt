@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studyprojectrnc.data.db.ModelRealm
+import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.squareup.picasso.Picasso
 
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
-    private val itemList = mutableListOf<ModelRealm>()
+    private val itemList = mutableListOf<ModelImageRealm>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivImage: ImageView = view.findViewById(R.id.ivImage)
@@ -30,7 +30,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
     override fun getItemCount() = itemList.size
 
-    fun addData(images: List<ModelRealm>?) {
+    fun addData(images: List<ModelImageRealm>?) {
         itemList.apply {
             clear()
             addAll(images ?: arrayListOf())
@@ -38,7 +38,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun updateTitleData(data: List<ModelRealm>) {
+    fun updateTitleData(data: List<ModelImageRealm>) {
         val diffResult = DiffUtil.calculateDiff(ImageDiffUtilCallback(this.itemList, data))
         itemList.clear()
         itemList.addAll(data)
@@ -47,8 +47,8 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 }
 
 private class ImageDiffUtilCallback(
-    val newPersons: List<ModelRealm>,
-    val oldPersons: List<ModelRealm>,
+    val newPersons: List<ModelImageRealm>,
+    val oldPersons: List<ModelImageRealm>,
 ) : DiffUtil.Callback() {
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
