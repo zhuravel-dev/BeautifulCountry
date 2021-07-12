@@ -1,8 +1,7 @@
 package com.example.studyprojectrnc.data.local
 
 import android.location.Location
-import com.example.studyprojectrnc.data.realmforImage.ModelImageRealm
-import com.example.studyprojectrnc.data.realmforImage.ModelLocationRealm
+import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.example.studyprojectrnc.repository.model.Hits
 import io.realm.Realm
 import java.util.concurrent.Executors
@@ -29,21 +28,4 @@ class LocalSource {
             { callback.invoke(getImageRealmObjects()) }
         )
     }
-
-    fun saveLocationRealm(location: Location) {
-        execService.submit {
-        realm.executeTransactionAsync { realm ->
-            ModelLocationRealm(location.latitude, location.longitude, location.altitude)
-                .let(realm::copyToRealm)
-        }}
-    }
-
-    fun getLocationRealm(): List<Location> =
-        realm.where(ModelLocationRealm::class.java).findAll().map { it.run {
-            Location("Realm").apply {
-                latitude = it.latitude
-                longitude = it.longitude
-                altitude = it.altitude
-            }
-        } }
 }

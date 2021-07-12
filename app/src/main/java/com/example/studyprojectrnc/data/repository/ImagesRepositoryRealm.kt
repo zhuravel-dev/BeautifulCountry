@@ -3,14 +3,14 @@ package com.example.studyprojectrnc.data.repository
 import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofit
 import com.example.studyprojectrnc.data.retrofit.RetrofitClientInstance
 import com.example.studyprojectrnc.data.local.LocalSource
-import com.example.studyprojectrnc.data.realmforImage.ModelImageRealm
+import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.example.studyprojectrnc.repository.model.HitsDataList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.Executors
 
-class ImagesRepository {
+class ImagesRepositoryRealm {
 
     private val localSource = LocalSource()
     private val remoteSource = RetrofitClientInstance.getRetrofitInstance().create(ImagesServiceRetrofit::class.java)

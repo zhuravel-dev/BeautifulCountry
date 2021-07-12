@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc
+package com.example.studyprojectrnc.data.realmForImage
 
 import android.app.Application
 import io.realm.Realm

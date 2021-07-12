@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc
+package com.example.studyprojectrnc.location
 
 import android.Manifest
 import android.app.Notification
@@ -9,7 +9,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.LocationManager
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
@@ -18,7 +17,11 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
 
-const val NOTIFICATION_CHANNEL_ID = "com.getlocationbackground"
+const val NOTIFICATION_CHANNEL_ID = "get location background"
+const val FIFTEEN_MINUTES: Long = 1000
+const val RESTART_SERVICE = "restart service"
+const val LOCATION_UPDATE = "location update"
+
 class LocationService: Service() {
     var latitude: Double = 0.0
     var longitude: Double = 0.0
@@ -55,8 +58,15 @@ class LocationService: Service() {
         startForeground(2, notification)
     }
 
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        super.onStartCommand(intent, flags, startId)
+        return START_STICKY
+    }
+
     private fun requestLocationUpdates() {
         val request = LocationRequest()
+        request.interval = FIFTEEN_MINUTES
+        request.fastestInterval = 1000
         request.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         val client: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(this)
@@ -71,19 +81,26 @@ class LocationService: Service() {
                     longitude = locationResult.lastLocation.longitude
                     latitude = locationResult.lastLocation.latitude
                     altitude = locationResult.lastLocation.altitude
-                    Log.d("Location Service", "location update ")
+                    Log.d(LOCATION_SERVICE, LOCATION_UPDATE)
+                    if (latitude != 0.0 && longitude != 0.0) {
+                        Log.d(
+                            "Location::",
+                            latitude.toString() + ":::" + longitude.toString()
+                        )
+                    }
                 }
             }, null)
         }
     }
 
-    fun isGPSEnabled() =
-        (getSystemService(Context.LOCATION_SERVICE) as? LocationManager)
-            ?.isProviderEnabled(LocationManager.GPS_PROVIDER) ?: false
-
-    fun checkLocationPermission(): Boolean =
-        checkCallingOrSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED
+    override fun onDestroy() {
+        super.onDestroy()
+        val broadcastIntent: Intent = Intent().apply {
+            action = RESTART_SERVICE
+            setClass(this@LocationService, RestartBackgroundService::class.java)
+        }
+        this.sendBroadcast(broadcastIntent)
+    }
 
     override fun onBind(intent: Intent?): IBinder? {
         return null

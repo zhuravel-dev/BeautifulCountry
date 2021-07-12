@@ -3,12 +3,12 @@ package com.example.studyprojectrnc.ui.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.studyprojectrnc.data.repository.ImagesRepository
-import com.example.studyprojectrnc.data.realmforImage.ModelImageRealm
+import com.example.studyprojectrnc.data.repository.ImagesRepositoryRealm
+import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 
 class SecondFragmentViewModel : ViewModel() {
 
-    private val repository = ImagesRepository()
+    private val repository = ImagesRepositoryRealm()
 
     private val _showProgress = MutableLiveData<Boolean>()
     val showProgress: LiveData<Boolean> = _showProgress

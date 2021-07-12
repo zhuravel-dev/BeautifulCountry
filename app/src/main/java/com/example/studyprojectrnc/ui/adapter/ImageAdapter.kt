@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studyprojectrnc.data.realmforImage.ModelImageRealm
+import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.squareup.picasso.Picasso
 
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.data.realmforImage
+package com.example.studyprojectrnc.data.realmForImage
 import io.realm.RealmObject
 
 open class ModelImageRealm (

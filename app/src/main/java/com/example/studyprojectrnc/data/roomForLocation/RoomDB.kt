@@ -10,7 +10,6 @@ abstract class RoomDB : RoomDatabase(){
     abstract fun locationDao(): Dao
 
     companion object {
-
         @Volatile
         private var INSTANCE: RoomDB? = null
 

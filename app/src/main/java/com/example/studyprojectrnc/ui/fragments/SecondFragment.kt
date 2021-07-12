@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studyprojectrnc.*
 import com.example.studyprojectrnc.databinding.FragmentSecondBinding
-import com.example.studyprojectrnc.data.realmforImage.ModelImageRealm
+import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.example.studyprojectrnc.ui.viewModel.SecondFragmentViewModel
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
@@ -51,5 +51,4 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
     private fun updateAdapter(images: List<ModelImageRealm>?) {
         images?.let(customAdapter::updateTitleData)
     }
-
 }
