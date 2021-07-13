@@ -3,11 +3,13 @@ package com.example.studyprojectrnc.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
+import com.example.studyprojectrnc.googleMaps.MapsFragment
 import com.example.studyprojectrnc.ui.fragments.Communicator
 import com.example.studyprojectrnc.ui.fragments.FirstFragment
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.ui.fragments.SecondFragment
 import com.example.studyprojectrnc.databinding.ActivityMainBinding
+import com.example.studyprojectrnc.googleMaps.AnimationFragment
 
 
 class MainActivity : AppCompatActivity(), Communicator {
@@ -33,11 +35,29 @@ class MainActivity : AppCompatActivity(), Communicator {
         val secondFragment = SecondFragment().apply {
             arguments = bundle
         }
-
         transaction.replace(R.id.fragment_container, secondFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    override fun navigateToMapFragment() {
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val mapsFragment = MapsFragment()
+        transaction.replace(R.id.fragment_container, mapsFragment)
+
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    override fun navigateToAnimationFragment() {
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val animation = AnimationFragment()
+        transaction.replace(R.id.fragment_container, animation)
+        transaction.setCustomAnimations(R.anim.animation_entry, R.anim.animation_exit)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 }
+
 
 
