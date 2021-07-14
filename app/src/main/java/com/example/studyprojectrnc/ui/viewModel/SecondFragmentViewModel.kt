@@ -7,17 +7,13 @@ import com.example.studyprojectrnc.data.repository.ImagesRepositoryRealm
 import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 
 class SecondFragmentViewModel : ViewModel() {
-
     private val repository = ImagesRepositoryRealm()
-
     private val _showProgress = MutableLiveData<Boolean>()
     val showProgress: LiveData<Boolean> = _showProgress
-
     private val _models = MutableLiveData<List<ModelImageRealm>>()
     val models: LiveData<List<ModelImageRealm>> = _models
 
-
-    fun getData(query: String = "forest") {
+    fun getData(query: String = "australia") {
         _showProgress.postValue(true)
         repository.getDataFromRemoteAndSaveToLocal(query) { models ->
             _showProgress.postValue(false)

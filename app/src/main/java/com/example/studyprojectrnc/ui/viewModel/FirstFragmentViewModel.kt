@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 
 class FirstFragmentViewModel : ViewModel() {
     private lateinit var database: RoomDB
-    private val repository by lazy {LocationRepositoryRoom(database) }
+    private val repository by lazy {LocationRepositoryRoom(database)}
 
     fun initRepo(context: Context) {
         database = RoomDB.getDatabaseClient(context)

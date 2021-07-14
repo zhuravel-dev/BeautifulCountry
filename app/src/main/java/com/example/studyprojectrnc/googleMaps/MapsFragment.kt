@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.ui.fragments.Communicator
@@ -51,25 +50,27 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     override fun onMapReady(map: GoogleMap) {
+
+        map.setInfoWindowAdapter(InfoWindowCustomAdapter(requireContext()))
+
         val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(
-            MarkerOptions().position(sydney).title("Marker in Sydney")
-                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_sydney))
+        val marker = map.addMarker(
+            MarkerOptions().position(sydney)
+                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_sydney)).infoWindowAnchor(0.5f, 0.5f)
         )
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
 
         val canberra = LatLng(-35.28, 149.13)
         map.addMarker(
             MarkerOptions().position(canberra).title("Marker in Canberra")
-                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_canberra))
+                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_canberra)).infoWindowAnchor(0.5f, 0.5f)
         )
-        map.moveCamera(CameraUpdateFactory.newLatLng(canberra))
 
         val melbourne = LatLng(-37.815, 144.946)
         map.addMarker(
-            MarkerOptions().position(melbourne).title("Marker in Canberra")
-                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_melbourne))
+            MarkerOptions().position(melbourne).title("Marker in Melbourne")
+                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_melbourne)).infoWindowAnchor(0.5f, 0.5f)
         )
+
         map.moveCamera(CameraUpdateFactory.newLatLng(melbourne))
 
         map.setOnInfoWindowClickListener { marker ->

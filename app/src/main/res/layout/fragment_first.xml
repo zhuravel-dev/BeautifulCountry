@@ -19,7 +19,7 @@
         android:src="@drawable/ic_location"
         android:text="@string/button_get_location"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvDatePicker" />
+        app:layout_constraintStart_toStartOf="@id/tvDatePicker" />
 
     <TextView
         android:id="@+id/tvWelcomeText"
@@ -57,7 +57,7 @@
         android:contentDescription="@string/desc"
         android:src="@drawable/ic_navigate_next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvDatePicker" />
+        app:layout_constraintEnd_toEndOf="@id/tvDatePicker" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnMap"
@@ -65,9 +65,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_map"
         app:layout_constraintBottom_toBottomOf="@+id/btnGetLocation"
-        app:layout_constraintEnd_toStartOf="@+id/btnNext"
-        app:layout_constraintStart_toEndOf="@+id/btnGetLocation"
-        app:layout_constraintTop_toTopOf="@+id/btnGetLocation"
+        app:layout_constraintEnd_toStartOf="@id/btnNext"
+        app:layout_constraintStart_toEndOf="@id/btnGetLocation"
+        app:layout_constraintTop_toTopOf="@id/btnGetLocation"
         android:contentDescription="@string/desc"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

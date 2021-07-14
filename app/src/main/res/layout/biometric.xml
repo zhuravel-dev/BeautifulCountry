@@ -24,7 +24,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="60dp"
         android:text="@string/txtNeedBiometric"
-        android:textColor="@color/biometric_text"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
