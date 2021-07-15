@@ -54,27 +54,29 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         map.setInfoWindowAdapter(InfoWindowCustomAdapter(requireContext()))
 
         val sydney = LatLng(-34.0, 151.0)
-        val marker = map.addMarker(
+        map.addMarker(
             MarkerOptions().position(sydney)
-                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_sydney)).infoWindowAnchor(0.5f, 0.5f)
+                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_sydney))
+                .infoWindowAnchor(0.5f, 0.5f)
         )
 
         val canberra = LatLng(-35.28, 149.13)
         map.addMarker(
             MarkerOptions().position(canberra).title("Marker in Canberra")
-                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_canberra)).infoWindowAnchor(0.5f, 0.5f)
+                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_canberra))
+                .infoWindowAnchor(0.5f, 0.5f)
         )
 
         val melbourne = LatLng(-37.815, 144.946)
         map.addMarker(
             MarkerOptions().position(melbourne).title("Marker in Melbourne")
-                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_melbourne)).infoWindowAnchor(0.5f, 0.5f)
+                .icon(bitmapDescriptorFromVector(requireActivity(), R.drawable.ic_melbourne))
+                .infoWindowAnchor(0.5f, 0.5f)
         )
 
         map.moveCamera(CameraUpdateFactory.newLatLng(melbourne))
-
-        map.setOnInfoWindowClickListener { marker ->
-            onMarkerClick(marker)
+        map.setOnInfoWindowClickListener { clickedMarker ->
+            onMarkerClick(clickedMarker)
         }
     }
 
