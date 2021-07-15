@@ -7,19 +7,19 @@
     android:gravity="center"
     tools:context=".ui.fragments.FirstFragment">
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnGetLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="28dp"
         android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/gray"
+        android:contentDescription="@string/desc"
+        android:src="@drawable/ic_location"
         android:text="@string/button_get_location"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/tvDatePicker" />
 
     <TextView
         android:id="@+id/tvWelcomeText"
@@ -28,7 +28,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:text="@string/welcome"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="24sp"
@@ -40,24 +40,34 @@
         android:id="@+id/tvDatePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvWelcomeText"
-         />
+        app:layout_constraintTop_toBottomOf="@id/tvWelcomeText" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="28dp"
         android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/gray"
-        android:text="@string/button_next"
+        android:contentDescription="@string/desc"
+        android:src="@drawable/ic_navigate_next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/tvDatePicker" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_map"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGetLocation"
+        app:layout_constraintEnd_toStartOf="@id/btnNext"
+        app:layout_constraintStart_toEndOf="@id/btnGetLocation"
+        app:layout_constraintTop_toTopOf="@id/btnGetLocation"
+        android:contentDescription="@string/desc"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

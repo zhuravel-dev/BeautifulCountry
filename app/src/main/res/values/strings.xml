@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">Study Project RnC</string>
     <string name="welcome">Hello! Today is:</string>
-    <string name="button_next">Next</string>
     <string name="txtNeedBiometric">Click button for authentication!</string>
     <string name="txtBtnBiometric">Authentication</string>
     <string name="error">Error</string>
     <string name="Successfully">Successfully!</string>
     <string name="Failed">Failed!</string>
-    <string name="Some_text">Some text</string>
     <string name="Enable_Location">Enable Location</string>
     <string name="Message">Your Locations Settings is set to \"Off\". Please enable location to use this app.</string>
     <string name="PositiveButton">OK</string>
@@ -18,4 +16,6 @@
     <string name="turn_on_gps">Please turn on GPS</string>
     <string name="OK">OK</string>
     <string name="button_get_location">Get location</string>
+    <string name="map">Map</string>
+    <string name="desc">desc</string>
 </resources>

@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.studyprojectrnc">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
@@ -17,18 +17,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
-            android:name="com.example.studyprojectrnc.ui.activities.SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.studyprojectrnc.ui.activities.MainActivity"
-            android:windowSoftInputMode="adjustResize">
-    </activity>
+            android:name=".ui.activities.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
         <receiver
             android:name=".location.RestartBackgroundService"
             android:enabled="true"
@@ -37,6 +43,7 @@
                 <action android:name="restartservice" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".location.LocationService"
             android:enabled="true"

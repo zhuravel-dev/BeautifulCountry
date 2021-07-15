@@ -50,6 +50,9 @@ class FirstFragment : Fragment() {
         binding.btnNext.setOnClickListener {
             communicator.passAndNavigateToSecondFragment(binding.tvWelcomeText.text.toString())
         }
+        binding.btnMap.setOnClickListener {
+            communicator.navigateToMapFragment()
+        }
         return view
     }
 
