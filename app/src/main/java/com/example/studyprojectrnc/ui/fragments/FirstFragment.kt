@@ -2,40 +2,23 @@ package com.example.studyprojectrnc.ui.fragments
 
 import android.Manifest
 import android.annotation.TargetApi
-import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import com.example.studyprojectrnc.R
-import com.example.studyprojectrnc.location.TrackLocationWorker
 import com.example.studyprojectrnc.location.Util
 import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 import com.example.studyprojectrnc.location.LocationService
-import com.example.studyprojectrnc.ui.viewModel.FirstFragmentViewModel
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.material.snackbar.Snackbar
-import java.util.concurrent.TimeUnit
+import com.example.studyprojectrnc.player.MusicService
 
 class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
     private lateinit var communicator: Communicator
-    private lateinit var viewModel: FirstFragmentViewModel
     private lateinit var mServiceIntent: Intent
     private var mLocationService: LocationService = LocationService()
 
@@ -48,6 +31,7 @@ class FirstFragment : Fragment() {
         val view = binding.root
         communicator = activity as Communicator
         binding.btnNext.setOnClickListener {
+            startMusicService()
             communicator.passAndNavigateToSecondFragment(binding.tvWelcomeText.text.toString())
         }
         binding.btnMap.setOnClickListener {
@@ -59,8 +43,6 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val thisActivity = this@FirstFragment
-        viewModel = ViewModelProvider(this).get(FirstFragmentViewModel::class.java)
-        viewModel.initRepo(requireContext())
 
         if (!Util.isLocationEnabledOrNot(requireContext())) {
             Util.showAlertLocation(
@@ -88,7 +70,6 @@ class FirstFragment : Fragment() {
                     getString(R.string.start_successfully),
                     Toast.LENGTH_SHORT
                 ).show()
-                viewModel.fetchAllLocation()
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -107,6 +88,10 @@ class FirstFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permissions, requestCode)
         }
+    }
+
+    private fun startMusicService() {
+        requireActivity().startService(Intent(context, MusicService::class.java))
     }
 
     override fun onDestroyView() {

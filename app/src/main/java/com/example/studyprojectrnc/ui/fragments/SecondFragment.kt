@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.example.studyprojectrnc.*
 import com.example.studyprojectrnc.databinding.FragmentSecondBinding
 import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
+import com.example.studyprojectrnc.location.TrackLocationWorker
 import com.example.studyprojectrnc.ui.viewModel.SecondFragmentViewModel
+import java.util.concurrent.TimeUnit
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
 
@@ -40,6 +44,15 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         viewModel = ViewModelProvider(this).get(SecondFragmentViewModel::class.java)
         viewModel?.getData()
         subscribeToLiveData()
+        startWorker()
+    }
+
+    private fun startWorker() {
+        val periodicWorkRequest = PeriodicWorkRequest
+            .Builder(TrackLocationWorker::class.java, 15, TimeUnit.MINUTES)
+            .build()
+        subscribeToLiveData()
+        WorkManager.getInstance().enqueue(periodicWorkRequest)
     }
 
     private fun subscribeToLiveData() {
