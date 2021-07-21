@@ -14,7 +14,7 @@ import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.location.Util
 import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 import com.example.studyprojectrnc.location.LocationService
-import com.example.studyprojectrnc.player.MusicService
+import com.example.studyprojectrnc.musicPlayer.MusicService
 
 class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
