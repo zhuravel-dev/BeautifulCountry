@@ -46,6 +46,7 @@ realm {
 }
 
 dependencies {
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "com.google.android.exoplayer:exoplayer:2.14.1"
     implementation "com.google.android.material:material:1.4.0"
     implementation "com.google.android.gms:play-services-location:18.0.0"
