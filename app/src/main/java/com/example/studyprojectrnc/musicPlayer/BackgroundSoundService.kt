@@ -118,7 +118,6 @@ class BackgroundSoundService : Service(), Observer {
 
     private fun startNotification(): Notification {
         remoteView.setOnClickPendingIntent(R.id.ivNotificationPlay, intentPlay)
-        remoteView.setOnClickPendingIntent(R.id.ivNotificationClear, intentCancel)
 
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID_MUSIC)
         notificationBuilder.setSmallIcon(R.drawable.ic_music_note)

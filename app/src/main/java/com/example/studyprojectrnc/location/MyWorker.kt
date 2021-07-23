@@ -9,7 +9,7 @@ import com.example.studyprojectrnc.data.repository.LocationRepositoryRoom
 import com.example.studyprojectrnc.data.roomForLocation.RoomDB
 import com.example.studyprojectrnc.musicPlayer.BackgroundSoundService
 
-class WorkManager constructor(
+class MyWorker constructor(
     val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {

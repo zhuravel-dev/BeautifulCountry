@@ -20,10 +20,6 @@
         <service
             android:name=".musicPlayer.BackgroundSoundService"
             android:enabled="true"
-            android:exported="true"></service>
-        <service
-            android:name=".musicPlayer.MusicService"
-            android:enabled="true"
             android:exported="true" />
 
         <meta-data
