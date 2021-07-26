@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -21,22 +20,20 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-
     defaultConfig {
         applicationId "com.example.studyprojectrnc"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         buildConfigField "String", "key", "\"22281764-aa17ceed19bc1ed0ef2893c10\""
-        buildConfigField "String", "q", "\"forest\""
+        buildConfigField "String", "q", "\"australia\""
         buildConfigField "String", "imageType", "\"photo\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -49,7 +46,7 @@ realm {
 }
 
 dependencies {
-    implementation "com.github.bumptech.glide:glide:3.8.0"
+    implementation "com.google.android.exoplayer:exoplayer:2.14.1"
     implementation "com.google.android.material:material:1.4.0"
     implementation "com.google.android.gms:play-services-location:18.0.0"
     implementation "androidx.room:room-ktx:2.3.0"

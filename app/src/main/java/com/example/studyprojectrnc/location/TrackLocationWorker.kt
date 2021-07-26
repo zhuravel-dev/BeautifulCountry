@@ -11,8 +11,8 @@ class TrackLocationWorker constructor(
     val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
-    private lateinit var database: RoomDB
-    private val repository by lazy { LocationRepositoryRoom(database) }
+
+    private val repository by lazy { LocationRepositoryRoom(context) }
 
     override suspend fun doWork() =
         try{
@@ -21,7 +21,7 @@ class TrackLocationWorker constructor(
             Result.success()
 
         } catch (e: Exception) {
-            Log.e("TAG", "Catch Exception fetchLocation() in Worker")
+            Log.e("TAG", "Catch Exception fetchLocation() in Worker ${e.message}")
             Result.failure()
         }
 }
