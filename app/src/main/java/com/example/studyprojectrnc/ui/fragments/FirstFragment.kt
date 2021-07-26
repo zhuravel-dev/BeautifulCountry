@@ -14,7 +14,6 @@ import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.location.Util
 import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 import com.example.studyprojectrnc.location.LocationService
-import com.example.studyprojectrnc.musicPlayer.MusicService
 
 class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
@@ -29,14 +28,14 @@ class FirstFragment : Fragment() {
     ): View {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
         val view = binding.root
-        communicator = activity as Communicator
+     /*   communicator = activity as Communicator
         binding.btnNext.setOnClickListener {
-            startMusicService()
             communicator.passAndNavigateToSecondFragment(binding.tvWelcomeText.text.toString())
         }
         binding.btnMap.setOnClickListener {
             communicator.navigateToMapFragment()
         }
+       */
         return view
     }
 
@@ -88,10 +87,6 @@ class FirstFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permissions, requestCode)
         }
-    }
-
-    private fun startMusicService() {
-        requireActivity().startService(Intent(context, MusicService::class.java))
     }
 
     override fun onDestroyView() {

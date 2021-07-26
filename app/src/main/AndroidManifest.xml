@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".musicPlayer.MusicService"
+            android:name=".musicPlayer.BackgroundSoundService"
             android:enabled="true"
             android:exported="true" />
 
