@@ -1,42 +1,52 @@
-package com.example.studyprojectrnc
+package com.example.studyprojectrnc.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
+    var onItemClick: ((ModelImageRealm) -> Unit)? = null
     private val itemList = mutableListOf<ModelImageRealm>()
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivImage: ImageView = view.findViewById(R.id.ivImage)
+        fun bind(modelImageRealm: ModelImageRealm) {
+            Picasso.get().load(modelImageRealm.largeImageURL).into(ivImage, object : Callback {
+                override fun onSuccess() {
+                    Log.i("TAG", "onSuccess")
+                }
+                override fun onError(e: Exception?) {
+                    Log.i("TAG", "onError")
+                }
+            })
+            itemView.setOnClickListener {
+                onItemClick?.invoke(modelImageRealm)
+            }
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.title_view_item, viewGroup, false)
-
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        Picasso.get().load(itemList[position].largeImageURL).into(viewHolder.ivImage)
+        val modelImageRealm = itemList[position]
+        viewHolder.bind(modelImageRealm)
     }
 
     override fun getItemCount() = itemList.size
-
-    fun addData(images: List<ModelImageRealm>?) {
-        itemList.apply {
-            clear()
-            addAll(images ?: arrayListOf())
-        }
-        notifyDataSetChanged()
-    }
 
     fun updateTitleData(data: List<ModelImageRealm>) {
         val diffResult = DiffUtil.calculateDiff(ImageDiffUtilCallback(this.itemList, data))

@@ -2,7 +2,7 @@ package com.example.studyprojectrnc.repository.model
 
 import com.google.gson.annotations.SerializedName
 
-data class HitsDataList (
+data class ResponseDataList (
 	@SerializedName("hits")
-	var images: List<Hits>? = null
+	var images: List<Response>? = null
 )

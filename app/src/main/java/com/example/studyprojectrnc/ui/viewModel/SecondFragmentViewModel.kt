@@ -13,7 +13,7 @@ class SecondFragmentViewModel : ViewModel() {
     private val _models = MutableLiveData<List<ModelImageRealm>>()
     val models: LiveData<List<ModelImageRealm>> = _models
 
-    fun getData(query: String = "australia") {
+    fun fetchData(query: String = "australia") {
         _showProgress.postValue(true)
         repository.getDataFromRemoteAndSaveToLocal(query) { models ->
             _showProgress.postValue(false)

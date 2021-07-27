@@ -1,29 +1,28 @@
 package com.example.studyprojectrnc.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import androidx.work.WorkManager.getInstance
 import com.example.studyprojectrnc.*
-import com.example.studyprojectrnc.databinding.FragmentSecondBinding
 import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.example.studyprojectrnc.location.MyWorker
+import com.example.studyprojectrnc.ui.dialogDetail.DialogDetail
+import com.example.studyprojectrnc.ui.adapters.ImageAdapter
 import com.example.studyprojectrnc.ui.viewModel.SecondFragmentViewModel
+import kotlinx.android.synthetic.main.fragment_second.*
 import java.util.concurrent.TimeUnit
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
 
-    lateinit var viewBinding: FragmentSecondBinding
     private var viewModel: SecondFragmentViewModel? = null
     private val customAdapter by lazy { ImageAdapter() }
-
-    private var list: List<ModelImageRealm>? = null
+    private val dialogDetail = DialogDetail(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,17 +32,20 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
+    private fun initAdapter() {
+        customAdapter.onItemClick = { largeImage ->
+            Log.d("TAG", "${largeImage.largeImageURL}")
+            println("${largeImage.largeImageURL}")
+            dialogDetail.startShowing(largeImage.largeImageURL)
+        }
+        rcView.adapter = customAdapter
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding = FragmentSecondBinding.bind(view)
-
-        viewBinding.rcView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = customAdapter
-        }
-
+        initAdapter()
         viewModel = ViewModelProvider(this).get(SecondFragmentViewModel::class.java)
-        viewModel?.getData()
+        viewModel?.fetchData()
         subscribeToLiveData()
         startWorker()
     }

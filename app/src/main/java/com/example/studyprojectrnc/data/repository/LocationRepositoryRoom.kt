@@ -28,7 +28,5 @@ class LocationRepositoryRoom(context: Context) {
                 )
             )
     }
-
-    fun getLocationLiveData(): LiveData<Entity> = database.locationDao().getLocationDetails()
 }
 
