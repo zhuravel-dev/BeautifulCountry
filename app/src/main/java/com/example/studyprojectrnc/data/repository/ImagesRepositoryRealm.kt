@@ -1,5 +1,6 @@
 package com.example.studyprojectrnc.data.repository
 
+import android.net.Uri
 import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofit
 import com.example.studyprojectrnc.data.retrofit.RetrofitClientInstance
 import com.example.studyprojectrnc.data.local.LocalSource
@@ -13,21 +14,40 @@ import java.util.concurrent.Executors
 class ImagesRepositoryRealm {
 
     private val localSource = LocalSource()
-    private val remoteSource = RetrofitClientInstance.getRetrofitInstance().create(ImagesServiceRetrofit::class.java)
+    private val remoteSource =
+        RetrofitClientInstance.getRetrofitInstance().create(ImagesServiceRetrofit::class.java)
     private val execService = Executors.newSingleThreadExecutor()
 
-    fun getDataFromRemoteAndSaveToLocal(q: String, callback: (List<ModelImageRealm>) -> Unit) {
-        execService.submit {
-            remoteSource.getContent(q = q).enqueue(object : Callback<ResponseDataList> {
-                override fun onResponse(call: Call<ResponseDataList>, response: Response<ResponseDataList>) {
-                    if(response.isSuccessful) localSource.saveImageRealmObjects(response.body()?.images, callback)
-                    else callback.invoke(listOf())
-                }
+    suspend fun getDataFromRemoteAndSaveToLocal(): ASDASDA {
 
-                override fun onFailure(call: Call<ResponseDataList>, t: Throwable) {
-                    callback.invoke(listOf())
-                }
-            })
+
+        val response = remoteSource.getContent(
+            "22281764-aa17ceed19bc1ed0ef2893c10",
+            "australia",
+            "photo",
+
+            )
+        val pagedResponse = response.body()
+        val data = pagedResponse?.results
+
+        var nextPageNumber: Int? = null
+        if (pagedResponse?.pageInfo?.next != null) {
+            val uri = Uri.parse(pagedResponse.pageInfo.next)
+            val nextPageQuery = uri.getQueryParameter("page")
+            nextPageNumber = nextPageQuery?.toInt()
         }
+
+        //data  -> store to db (data.orEmpty().map { it.toModelImageRealm() } <---mapping )
+        //get from db and you receive ModelImageRealm
+
+        return ASDASDA(nextPageNumber!!, data.orEmpty().map { it.toModelImageRealm() })
     }
+
+
+}
+
+data class ASDASDA(val nextPageNumber: Int, val listMM: List<ModelImageRealm>)
+
+private fun ResponseDataList.toModelImageRealm(): ModelImageRealm {
+    TODO("Not yet implemented")
 }
