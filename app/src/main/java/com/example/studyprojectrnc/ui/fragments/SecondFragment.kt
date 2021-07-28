@@ -66,9 +66,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
     }
 
     private fun subscribeToLiveData() {
-        viewModel?.models?.observe(viewLifecycleOwner, {
-            it?.let(::updateAdapter)
-        })
+
         lifecycleScope.launchWhenCreated {
             Pager(config = PagingConfig(pageSize = 10, maxSize = 200),
                 pagingSourceFactory = { ImagePaging(myServis) }).flow.collectLatest {
@@ -77,7 +75,5 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         }
     }
 
-    private fun updateAdapter(images: List<ModelImageRealm>?) {
-        images?.let(customAdapter::updateTitleData)
-    }
+
 }
