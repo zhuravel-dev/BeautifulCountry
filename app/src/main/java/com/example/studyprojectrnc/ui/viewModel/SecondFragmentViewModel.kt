@@ -1,5 +1,6 @@
 package com.example.studyprojectrnc.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,11 +15,8 @@ class SecondFragmentViewModel : ViewModel() {
     val models: LiveData<List<ModelImageRealm>> = _models
 
     fun fetchData(query: String = "australia") {
+        Log.i("TAG", "In fun fetchData")
         _showProgress.postValue(true)
-        repository.getDataFromRemoteAndSaveToLocal(query) { models ->
-            _showProgress.postValue(false)
-            _models.postValue(models)
-        }
     }
 }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studyprojectrnc.R
@@ -13,7 +14,8 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
-class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+class ImageAdapter :
+    PagingDataAdapter<ModelImageRealm, ImageAdapter.ViewHolder>(ImageDiffUtilCallBack()) {
 
     var onItemClick: ((ModelImageRealm) -> Unit)? = null
     private val itemList = mutableListOf<ModelImageRealm>()
@@ -49,14 +51,30 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
     override fun getItemCount() = itemList.size
 
     fun updateTitleData(data: List<ModelImageRealm>) {
-        val diffResult = DiffUtil.calculateDiff(ImageDiffUtilCallback(this.itemList, data))
+        val diffResult = DiffUtil.calculateDiff(DiffUtilCallback(this.itemList, data))
         itemList.clear()
         itemList.addAll(data)
         diffResult.dispatchUpdatesTo(this)
     }
-}
+    class ImageDiffUtilCallBack : DiffUtil.ItemCallback<ModelImageRealm>() {
+        override fun areItemsTheSame(
+            oldItem: ModelImageRealm,
+            newItem: ModelImageRealm
+        ): Boolean {
+            return oldItem.largeImageURL == newItem.largeImageURL
+        }
 
-private class ImageDiffUtilCallback(
+        override fun areContentsTheSame(
+            oldItem: ModelImageRealm,
+            newItem: ModelImageRealm
+        ): Boolean {
+            return oldItem.largeImageURL == newItem.largeImageURL
+                    && oldItem.num == newItem.num
+        }
+
+    }
+}
+private class DiffUtilCallback(
     val newPersons: List<ModelImageRealm>,
     val oldPersons: List<ModelImageRealm>,
 ) : DiffUtil.Callback() {

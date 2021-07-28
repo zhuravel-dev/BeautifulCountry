@@ -12,7 +12,9 @@ interface ImagesServiceRetrofit {
     suspend fun getContent(
         @Query("key") key: String = BuildConfig.key,
         @Query("q") q: String = BuildConfig.q,
-        @Query("image_type") imageType: String = BuildConfig.imageType
+        @Query("image_type") imageType: String = BuildConfig.imageType,
+        @Query("page") page: Int?,
+        @Query("per_page") per_page: Int?
     ): Response<PagedResponse<ResponseDataList>>
 }
 

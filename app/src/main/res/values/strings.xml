@@ -23,4 +23,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="camera">Camera</string>
     <string name="exit">Exit</string>
+    <string name="_10_items_on_page">10 items on page</string>
+    <string name="_15_items_on_page">15 items on page</string>
+    <string name="_20_items_on_page">20 items on page</string>
 </resources>
