@@ -6,15 +6,16 @@ import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofit
 import com.example.studyprojectrnc.data.retrofit.RetrofitClientInstance
 import com.example.studyprojectrnc.data.local.LocalSource
 import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
-import com.example.studyprojectrnc.repository.model.ResponseDataList
+import com.example.studyprojectrnc.data.retrofit.PageInfo
+import com.example.studyprojectrnc.data.retrofit.PagedResponse
+import com.example.studyprojectrnc.data.retrofit.model.Response
+import com.example.studyprojectrnc.data.retrofit.model.ResponseDataList
 import java.util.concurrent.Executors
 
 class ImagesRepositoryRealm {
-
-    private val localSource = LocalSource()
+    private var pageNumber = 0
     private val remoteSource =
         RetrofitClientInstance.getRetrofitInstance().create(ImagesServiceRetrofit::class.java)
-    private val execService = Executors.newSingleThreadExecutor()
 
     suspend fun getDataFromRemoteAndSaveToLocal(params: PagingSource.LoadParams<Int>): TransitionResponse {
         val nextPage = params.key ?: 1
@@ -26,28 +27,14 @@ class ImagesRepositoryRealm {
             20
         )
 
-        val pagedResponse = response.body()
-        val data = pagedResponse?.results
-
-        var nextPageNumber: Int? = null
-        if (pagedResponse?.pageInfo?.next != null) {
-            val uri = Uri.parse(pagedResponse.pageInfo.next)
-            val nextPageQuery = uri.getQueryParameter("page")
-            nextPageNumber = nextPageQuery?.toInt()
-        }
-
-        //data  -> store to db
-       // (data.orEmpty().map { it.toModelImageRealm() } )
-            // <---mapping )
-        //get from db and you receive ModelImageRealm
-
-        return TransitionResponse(nextPageNumber!!, data.orEmpty().map { it.toModelImageRealm() })
+        return TransitionResponse(pageNumber++, response.toModelImageRealm())
     }
 }
 
 data class TransitionResponse(val nextPageNumber: Int, val listMM: List<ModelImageRealm>)
 
-private fun ResponseDataList.toModelImageRealm(): ModelImageRealm {
-    TODO("Not yet implemented")
+private fun ResponseDataList.toModelImageRealm(): List<ModelImageRealm> {
+    return this.images?.map {
+        ModelImageRealm(num = it.id, previewURL = it.previewURL)
+    } ?: listOf()
 }
-

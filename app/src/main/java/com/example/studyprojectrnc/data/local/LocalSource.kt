@@ -1,7 +1,7 @@
 package com.example.studyprojectrnc.data.local
 
 import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
-import com.example.studyprojectrnc.repository.model.Response
+import com.example.studyprojectrnc.data.retrofit.model.Response
 import io.realm.Realm
 
 class LocalSource {

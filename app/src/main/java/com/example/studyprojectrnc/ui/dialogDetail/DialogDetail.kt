@@ -13,7 +13,7 @@ class DialogDetail(private val secondFragment: SecondFragment) {
 
     private lateinit var isDialog: AlertDialog
 
-    fun startShowing(imageView: String?) {
+    fun startShowing(imageView: String?, likes: Int) {
         val inflater = secondFragment.layoutInflater
         val dialogView = inflater.inflate(R.layout.dialog_detail_screen, null)
         Picasso.get().load(imageView).into(dialogView.ivDetailImage, object : Callback {

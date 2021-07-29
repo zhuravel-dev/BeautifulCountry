@@ -13,6 +13,8 @@ import com.example.studyprojectrnc.ui.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
+var SORT = 10
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
@@ -47,9 +49,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Ok, 10 items", Toast.LENGTH_SHORT).show()
             }
             R.id.menu15 -> {
+                SORT = 15
                 Toast.makeText(this, "Ok, 15 items", Toast.LENGTH_SHORT).show()
             }
             R.id.menu20 -> {
+                SORT = 20
                 Toast.makeText(this, "Ok, 20 items", Toast.LENGTH_SHORT).show()
             }
         }

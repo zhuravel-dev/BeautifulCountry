@@ -13,9 +13,9 @@ import androidx.paging.PagingConfig
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.example.studyprojectrnc.*
-import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.example.studyprojectrnc.data.repository.ImagesRepositoryRealm
 import com.example.studyprojectrnc.location.MyWorker
+import com.example.studyprojectrnc.ui.activities.SORT
 import com.example.studyprojectrnc.ui.dialogDetail.DialogDetail
 import com.example.studyprojectrnc.ui.adapters.ImageAdapter
 import com.example.studyprojectrnc.ui.paging3.ImagePaging
@@ -29,7 +29,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
     private var viewModel: SecondFragmentViewModel? = null
     private val customAdapter by lazy { ImageAdapter() }
     private val dialogDetail = DialogDetail(this)
-    val myServis = ImagesRepositoryRealm()
+    val myService = ImagesRepositoryRealm()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,9 +41,9 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
 
     private fun initAdapter() {
         customAdapter.onItemClick = { largeImage ->
-            Log.d("TAG", "${largeImage.largeImageURL}")
-            println("${largeImage.largeImageURL}")
-            dialogDetail.startShowing(largeImage.largeImageURL)
+            Log.d("TAG", "${largeImage.previewURL}")
+            println("${largeImage.previewURL}")
+            dialogDetail.startShowing(largeImage.previewURL, largeImage.likes)
         }
         rcView.adapter = customAdapter
     }
@@ -66,14 +66,12 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
     }
 
     private fun subscribeToLiveData() {
-
         lifecycleScope.launchWhenCreated {
-            Pager(config = PagingConfig(pageSize = 10, maxSize = 200),
-                pagingSourceFactory = { ImagePaging(myServis) }).flow.collectLatest {
+            Pager(config = PagingConfig(pageSize = SORT, maxSize = 200),
+                pagingSourceFactory = { ImagePaging(myService) }).flow.collectLatest {
                 customAdapter.submitData(it)
             }
         }
     }
-
-
 }
+

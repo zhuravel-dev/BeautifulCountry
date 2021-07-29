@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.repository.model
+package com.example.studyprojectrnc.data.retrofit.model
 
 import com.google.gson.annotations.SerializedName
 

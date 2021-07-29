@@ -15,7 +15,7 @@ class SecondFragmentViewModel : ViewModel() {
     val models: LiveData<List<ModelImageRealm>> = _models
 
     fun fetchData(query: String = "australia") {
-        Log.i("TAG", "In fun fetchData")
+        Log.i("TAG", "In ViewModel, fun fetchData")
         _showProgress.postValue(true)
     }
 }

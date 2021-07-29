@@ -22,7 +22,7 @@ class ImageAdapter :
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivImage: ImageView = view.findViewById(R.id.ivImage)
         fun bind(modelImageRealm: ModelImageRealm?) {
-            Picasso.get().load(modelImageRealm?.largeImageURL).into(ivImage, object : Callback {
+            Picasso.get().load(modelImageRealm?.previewURL).into(ivImage, object : Callback {
                 override fun onSuccess() {
                     Log.i("TAG", "onSuccess")
                 }
@@ -49,23 +49,21 @@ class ImageAdapter :
         viewHolder.bind(modelImageRealm)
     }
 
-
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<ModelImageRealm>() {
             override fun areItemsTheSame(
                 oldItem: ModelImageRealm,
                 newItem: ModelImageRealm
             ): Boolean {
-                return oldItem.largeImageURL == newItem.largeImageURL
+                return oldItem.previewURL == newItem.previewURL
             }
 
             override fun areContentsTheSame(
                 oldItem: ModelImageRealm,
                 newItem: ModelImageRealm
             ): Boolean {
-                return oldItem.largeImageURL == newItem.largeImageURL && oldItem.num == newItem.num
+                return oldItem.previewURL == newItem.previewURL && oldItem.num == newItem.num
             }
-
         }
     }
 }
