@@ -29,7 +29,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        communicator = activity as Communicator
+        communicator = activity as Communicator
         return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 
@@ -81,7 +81,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
- //       communicator.navigateToAnimationFragment()
+        communicator.navigateToAnimationFragment()
         Log.i("TAG", "In onMarkerClick")
         return true
     }

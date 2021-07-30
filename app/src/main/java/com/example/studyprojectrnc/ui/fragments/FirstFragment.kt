@@ -28,14 +28,13 @@ class FirstFragment : Fragment() {
     ): View {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
         val view = binding.root
-     /*   communicator = activity as Communicator
+        communicator = activity as Communicator
         binding.btnNext.setOnClickListener {
             communicator.passAndNavigateToSecondFragment(binding.tvWelcomeText.text.toString())
         }
         binding.btnMap.setOnClickListener {
             communicator.navigateToMapFragment()
         }
-       */
         return view
     }
 
