@@ -29,7 +29,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
     private var viewModel: SecondFragmentViewModel? = null
     private val customAdapter by lazy { ImageAdapter() }
     private val dialogDetail = DialogDetail(this)
-    val myService = ImagesRepositoryRealm()
+    private val myService = ImagesRepositoryRealm()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +43,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         customAdapter.onItemClick = { largeImage ->
             Log.d("TAG", "${largeImage.previewURL}")
             println("${largeImage.previewURL}")
-            dialogDetail.startShowing(largeImage.previewURL, largeImage.likes)
+            dialogDetail.startShowing(largeImage.previewURL, largeImage.views)
         }
         rcView.adapter = customAdapter
     }
@@ -61,7 +61,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         val periodicWorkRequest = PeriodicWorkRequest
             .Builder(MyWorker::class.java, 15, TimeUnit.MINUTES)
             .build()
-        subscribeToLiveData()
+    //    subscribeToLiveData()
         WorkManager.getInstance().enqueue(periodicWorkRequest)
     }
 

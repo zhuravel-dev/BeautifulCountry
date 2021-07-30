@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu10 -> {
+                SORT = 10
                 Toast.makeText(this, "Ok, 10 items", Toast.LENGTH_SHORT).show()
             }
             R.id.menu15 -> {

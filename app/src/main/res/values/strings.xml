@@ -26,4 +26,5 @@
     <string name="_10_items_on_page">10 items on page</string>
     <string name="_15_items_on_page">15 items on page</string>
     <string name="_20_items_on_page">20 items on page</string>
+    <string name="views">views</string>
 </resources>

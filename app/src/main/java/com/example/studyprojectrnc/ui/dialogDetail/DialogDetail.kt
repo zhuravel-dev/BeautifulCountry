@@ -13,20 +13,22 @@ class DialogDetail(private val secondFragment: SecondFragment) {
 
     private lateinit var isDialog: AlertDialog
 
-    fun startShowing(imageView: String?, likes: Int) {
+    fun startShowing(imageView: String?, views: Int?) {
         val inflater = secondFragment.layoutInflater
         val dialogView = inflater.inflate(R.layout.dialog_detail_screen, null)
         Picasso.get().load(imageView).into(dialogView.ivDetailImage, object : Callback {
             override fun onSuccess() {
-                Log.i("TAG", "onSuccess")
+                Log.i("TAG", "DialogDetail: onSuccess")
             }
+
             override fun onError(e: Exception?) {
-                Log.i("TAG", "onError")
+                Log.i("TAG", "DialogDetail: onError")
             }
         })
         dialogView.btnExitDialog.setOnClickListener {
             isDismiss()
         }
+        dialogView.tvViews.text = views.toString()
         val builder = AlertDialog.Builder(secondFragment.requireContext())
         builder.setView(dialogView)
         builder.setCancelable(false)

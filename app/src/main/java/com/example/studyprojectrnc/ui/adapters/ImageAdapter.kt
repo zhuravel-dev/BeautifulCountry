@@ -26,14 +26,12 @@ class ImageAdapter :
                 override fun onSuccess() {
                     Log.i("TAG", "onSuccess")
                 }
-
                 override fun onError(e: Exception?) {
                     Log.i("TAG", "onError")
                 }
             })
             itemView.setOnClickListener {
                 modelImageRealm?.let{onItemClick?.invoke(it)}
-
             }
         }
     }
@@ -62,7 +60,8 @@ class ImageAdapter :
                 oldItem: ModelImageRealm,
                 newItem: ModelImageRealm
             ): Boolean {
-                return oldItem.previewURL == newItem.previewURL && oldItem.num == newItem.num
+                return oldItem.previewURL == newItem.previewURL
+                        && oldItem.views == newItem.views
             }
         }
     }

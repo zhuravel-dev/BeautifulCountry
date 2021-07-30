@@ -4,5 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseDataList (
 	@SerializedName("hits")
-	var images: List<Response>? = null
+	var images: List<Response>? = null,
+	var views: List<Response>? = null
 )
