@@ -1,7 +1,6 @@
 package com.example.studyprojectrnc.data.repository
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import com.example.studyprojectrnc.data.roomForLocation.RoomDB
 import com.example.studyprojectrnc.data.roomForLocation.Entity
 import com.example.studyprojectrnc.location.LocationService
@@ -28,7 +27,5 @@ class LocationRepositoryRoom(context: Context) {
                 )
             )
     }
-
-    fun getLocationLiveData(): LiveData<Entity> = database.locationDao().getLocationDetails()
 }
 

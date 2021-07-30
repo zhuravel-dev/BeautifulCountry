@@ -17,7 +17,6 @@
         android:layout_marginBottom="32dp"
         android:contentDescription="@string/desc"
         android:src="@drawable/ic_location"
-        android:text="@string/button_get_location"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/tvDatePicker" />
 

@@ -1,71 +1,71 @@
-package com.example.studyprojectrnc
+package com.example.studyprojectrnc.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
-class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+class ImageAdapter :
+    PagingDataAdapter<ModelImageRealm, ImageAdapter.ViewHolder>(diffCallback) {
 
-    private val itemList = mutableListOf<ModelImageRealm>()
+    var onItemClick: ((ModelImageRealm) -> Unit)? = null
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivImage: ImageView = view.findViewById(R.id.ivImage)
+        fun bind(modelImageRealm: ModelImageRealm?) {
+            Picasso.get().load(modelImageRealm?.previewURL).into(ivImage, object : Callback {
+                override fun onSuccess() {
+                    Log.i("TAG", "onSuccess")
+                }
+                override fun onError(e: Exception?) {
+                    Log.i("TAG", "onError")
+                }
+            })
+            itemView.setOnClickListener {
+                modelImageRealm?.let{onItemClick?.invoke(it)}
+            }
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.title_view_item, viewGroup, false)
-
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        Picasso.get().load(itemList[position].largeImageURL).into(viewHolder.ivImage)
+        val modelImageRealm = getItem(position)
+        viewHolder.bind(modelImageRealm)
     }
 
-    override fun getItemCount() = itemList.size
+    companion object {
+        val diffCallback = object : DiffUtil.ItemCallback<ModelImageRealm>() {
+            override fun areItemsTheSame(
+                oldItem: ModelImageRealm,
+                newItem: ModelImageRealm
+            ): Boolean {
+                return oldItem.previewURL == newItem.previewURL
+            }
 
-    fun addData(images: List<ModelImageRealm>?) {
-        itemList.apply {
-            clear()
-            addAll(images ?: arrayListOf())
+            override fun areContentsTheSame(
+                oldItem: ModelImageRealm,
+                newItem: ModelImageRealm
+            ): Boolean {
+                return oldItem.previewURL == newItem.previewURL
+                        && oldItem.views == newItem.views
+            }
         }
-        notifyDataSetChanged()
-    }
-
-    fun updateTitleData(data: List<ModelImageRealm>) {
-        val diffResult = DiffUtil.calculateDiff(ImageDiffUtilCallback(this.itemList, data))
-        itemList.clear()
-        itemList.addAll(data)
-        diffResult.dispatchUpdatesTo(this)
     }
 }
 
-private class ImageDiffUtilCallback(
-    val newPersons: List<ModelImageRealm>,
-    val oldPersons: List<ModelImageRealm>,
-) : DiffUtil.Callback() {
-
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldPersons[oldItemPosition] == newPersons[newItemPosition]
-    }
-
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldPersons[oldItemPosition].num == newPersons[newItemPosition].num
-    }
-
-    override fun getNewListSize(): Int {
-        return newPersons.size
-    }
-
-    override fun getOldListSize(): Int {
-        return oldPersons.size
-    }
-}
 
 

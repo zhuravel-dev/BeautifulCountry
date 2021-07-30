@@ -1,8 +1,8 @@
-package com.example.studyprojectrnc.repository.model
+package com.example.studyprojectrnc.data.retrofit.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Hits (
+data class Response (
 	@SerializedName("id") val id : Int,
 	@SerializedName("pageURL") val pageURL : String,
 	@SerializedName("type") val type : String,
