@@ -26,21 +26,28 @@ class BiometricActivity : AppCompatActivity() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
                     binding.tvBiometric.text = "Authentication Error: $errString"
-                    Toast.makeText(this@BiometricActivity, "Authentication Error: $errString", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@BiometricActivity,
+                        "Authentication Error: $errString",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
                     binding.tvBiometric.text = "Authentication Failed"
-                    Toast.makeText(this@BiometricActivity,
-                        "Auth failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@BiometricActivity,
+                        "Auth failed", Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
                     binding.tvBiometric.text = "Authentication succeed"
                     Toast.makeText(
-                        this@BiometricActivity, "Auth succeed", Toast.LENGTH_SHORT).show()
+                        this@BiometricActivity, "Auth succeed", Toast.LENGTH_SHORT
+                    ).show()
                     startActivity(
                         Intent(this@BiometricActivity, MainActivity::class.java)
                     )

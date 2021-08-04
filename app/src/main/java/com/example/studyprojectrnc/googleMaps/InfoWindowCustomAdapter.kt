@@ -24,8 +24,9 @@ class InfoWindowCustomAdapter(private val context: Context) : GoogleMap.InfoWind
             .load(URL)
             .into(image, object : Callback {
                 override fun onSuccess() {
-                    Log.d("TAG","All is ok")
+                    Log.d("TAG", "All is ok")
                 }
+
                 override fun onError(e: Exception?) {
                     throw Exception("something wrong")
                 }

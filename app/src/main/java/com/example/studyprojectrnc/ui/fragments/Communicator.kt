@@ -4,4 +4,5 @@ interface Communicator {
     fun passAndNavigateToSecondFragment(txtView: String)
     fun navigateToMapFragment()
     fun navigateToAnimationFragment()
+    fun navigateToCameraFragment()
 }

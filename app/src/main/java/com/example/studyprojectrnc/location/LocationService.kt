@@ -22,7 +22,7 @@ const val FIFTEEN_MINUTES: Long = 1000
 const val RESTART_SERVICE = "restart service"
 const val LOCATION_UPDATE = "location update"
 
-class LocationService: Service() {
+class LocationService : Service() {
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     var altitude: Double = 0.0

@@ -13,7 +13,7 @@ class LocalSource {
     private fun getImageRealmObjects(): List<ModelImageRealm> =
         realm.where(ModelImageRealm::class.java).findAll()
 
-    fun saveImageRealmObjects(models: List<Response>?, callback: (List<ModelImageRealm>) -> Unit) {
+  /*  fun saveImageRealmObjects(models: List<Response>?, callback: (List<ModelImageRealm>) -> Unit) {
         realm.executeTransactionAsync(
             { realm ->
                 models?.map {
@@ -23,5 +23,5 @@ class LocalSource {
             { callback.invoke(getImageRealmObjects()) },
             { callback.invoke(getImageRealmObjects()) }
         )
-    }
+    }*/
 }

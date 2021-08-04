@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.ui.fragments.Communicator
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -81,7 +79,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        communicator.navigateToAnimationFragment()
+//        communicator.navigateToAnimationFragment()
         Log.i("TAG", "In onMarkerClick")
         return true
     }

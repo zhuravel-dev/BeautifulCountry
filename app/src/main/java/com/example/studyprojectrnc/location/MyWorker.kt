@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.studyprojectrnc.data.repository.LocationRepositoryRoom
-import com.example.studyprojectrnc.data.roomForLocation.RoomDB
 import com.example.studyprojectrnc.musicPlayer.BackgroundSoundService
 
 class MyWorker constructor(

@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.location.Util
 import com.example.studyprojectrnc.databinding.FragmentFirstBinding
@@ -52,8 +53,7 @@ class FirstFragment : Fragment() {
         }
 
         requestPermissionsSafely(
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 200
-        )
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 200)
 
         binding.btnGetLocation.setOnClickListener {
             mServiceIntent = Intent(requireContext(), mLocationService.javaClass)

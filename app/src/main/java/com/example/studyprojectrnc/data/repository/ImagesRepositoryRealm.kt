@@ -17,10 +17,9 @@ class ImagesRepositoryRealm {
             "22281764-aa17ceed19bc1ed0ef2893c10",
             "australia",
             "photo",
-             nextPage,
+            nextPage,
             20
         )
-
         return TransitionResponse(pageNumber++, response.toModelImageRealm())
     }
 }
@@ -29,6 +28,6 @@ data class TransitionResponse(val nextPageNumber: Int, val listMM: List<ModelIma
 
 private fun ResponseDataList.toModelImageRealm(): List<ModelImageRealm> {
     return this.images?.map {
-        ModelImageRealm(views = it.views, previewURL = it.previewURL)
+        ModelImageRealm(views = it.views, largeImageURL = it.largeImageURL)
     } ?: listOf()
 }
