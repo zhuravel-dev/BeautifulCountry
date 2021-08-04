@@ -36,6 +36,9 @@ class FirstFragment : Fragment() {
         binding.btnMap.setOnClickListener {
             communicator.navigateToMapFragment()
         }
+        binding.btnCamera.setOnClickListener {
+            communicator.navigateToCameraFragment()
+        }
         return view
     }
 

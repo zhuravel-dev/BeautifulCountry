@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/drawable/ic_add_a_photo.xml" value="0.176" />
+        <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/drawable/ic_backspace.xml" value="0.202734375" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/drawable/ic_camera.xml" value="0.202734375" />
+        <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/drawable/ic_canberra.xml" value="0.202734375" />
+        <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/drawable/ic_clear.xml" value="0.202734375" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/drawable/ic_pause.xml" value="0.202734375" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.1" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout-sw600dp/animation.xml" value="0.11074561403508772" />
@@ -11,10 +15,11 @@
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout-sw600dp/fragment_first.xml" value="0.1" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout-sw600dp/fragment_maps.xml" value="0.11074561403508772" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout-sw600dp/fragment_second.xml" value="0.1" />
+        <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/animation.xml" value="0.12239583333333333" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/dialog_detail_screen.xml" value="0.1" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/experiments.xml" value="0.12637061403508773" />
-        <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/fragment_camera.xml" value="0.1" />
+        <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/fragment_camera.xml" value="0.264" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/fragment_detail_recycler_view.xml" value="0.12637061403508773" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/fragment_first.xml" value="0.2" />
         <entry key="..\:/study-project-new-copy-02-07/app/src/main/res/layout/fragment_maps.xml" value="0.18297101449275363" />

@@ -28,7 +28,9 @@ class MainActivity : AppCompatActivity(), Communicator {
         setContentView(R.layout.activity_main)
 
         val firstFragment = FirstFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.mainFrame, firstFragment)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainFrame, firstFragment)
             .commit()
     }
 
