@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso
 
 private const val URL = "https://loremflickr.com/320/240/sea"
 
-class AnimationFragment: Fragment() {
+class AnimationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,8 +28,9 @@ class AnimationFragment: Fragment() {
             .load(URL)
             .into(image, object : Callback {
                 override fun onSuccess() {
-                    Log.d("TAG","All is fine")
+                    Log.d("TAG", "All is fine")
                 }
+
                 override fun onError(e: Exception?) {
                     throw Exception("Error")
                 }

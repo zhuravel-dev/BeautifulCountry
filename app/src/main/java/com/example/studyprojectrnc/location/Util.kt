@@ -22,6 +22,7 @@ object Util {
         Log.i("Service status", "Not running")
         return false
     }
+
     fun isLocationEnabledOrNot(context: Context): Boolean {
         val locationManager: LocationManager? =
             context.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
