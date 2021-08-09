@@ -1,7 +1,6 @@
 package com.example.studyprojectrnc.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import com.example.studyprojectrnc.*
+import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.data.repository.ImagesRepositoryRealm
-import com.example.studyprojectrnc.databinding.FragmentSecondBinding
 import com.example.studyprojectrnc.location.MyWorker
 import com.example.studyprojectrnc.ui.activities.SORT
 import com.example.studyprojectrnc.ui.adapters.ImageAdapter
@@ -46,7 +44,6 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
 
     private fun initAdapter() {
         customAdapter.onItemClick = { largeImage ->
-            Log.d("TAG", "${largeImage.largeImageURL}")
             println("${largeImage.largeImageURL}")
             openDetails(largeImage.largeImageURL)
         }
@@ -58,11 +55,9 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
             val navHostFragment = ImageDetailScreen()
             val bundle = Bundle()
             bundle.putString("abc", largeImageURL)
-            navHostFragment?.arguments = bundle
-            replace(R.id.detail_container, navHostFragment!!)
-            if (
-                sliding.isOpen
-            ) {
+            navHostFragment.arguments = bundle
+            replace(R.id.detail_container, navHostFragment)
+            if (sliding.isOpen) {
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             }
             sliding.open()
@@ -73,7 +68,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(SecondFragmentViewModel::class.java)
         viewModel?.fetchData()
-        sliding = view.findViewById<SlidingPaneLayout>(R.id.sliding)
+        //  sliding = view.findViewById(R.id.sliding)
         rcView = view.findViewById(R.id.rcView)
         subscribeToLiveData()
         startWorker()

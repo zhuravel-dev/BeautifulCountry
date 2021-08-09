@@ -5,16 +5,17 @@ import android.annotation.TargetApi
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
-import com.example.studyprojectrnc.location.Util
 import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 import com.example.studyprojectrnc.location.LocationService
+import com.example.studyprojectrnc.location.Util
+
+const val CODE = 200
 
 class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
@@ -39,6 +40,9 @@ class FirstFragment : Fragment() {
         binding.btnCamera.setOnClickListener {
             communicator.navigateToCameraFragment()
         }
+        binding.btnBluetooth?.setOnClickListener {
+            communicator.navigateToBluetoothFragment()
+        }
         return view
     }
 
@@ -56,7 +60,7 @@ class FirstFragment : Fragment() {
         }
 
         requestPermissionsSafely(
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 200)
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), CODE)
 
         binding.btnGetLocation.setOnClickListener {
             mServiceIntent = Intent(requireContext(), mLocationService.javaClass)

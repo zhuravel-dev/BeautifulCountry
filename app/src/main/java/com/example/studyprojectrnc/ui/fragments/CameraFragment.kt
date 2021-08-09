@@ -1,28 +1,37 @@
 package com.example.studyprojectrnc.ui.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.ImageFormat
+import android.hardware.camera2.CameraCharacteristics
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
-import androidx.fragment.app.Fragment
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.camera.camera2.interop.Camera2CameraInfo
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
 import kotlinx.android.synthetic.main.fragment_camera.*
 import java.io.File
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
+const val PREFS_KEY = "Prefs"
+const val SAVE_PHOTOS = "save_photos"
 
 class CameraFragment : Fragment() {
 
@@ -31,6 +40,8 @@ class CameraFragment : Fragment() {
     private lateinit var cameraExecutor: ExecutorService
     private var camera: Camera? = null
     private lateinit var safeContext: Context
+    var sizes : Array<Size>? = arrayOf<Size>()
+    val prefs = context?.getSharedPrefs()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,63 +66,14 @@ class CameraFragment : Fragment() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+        change_resolution.setOnClickListener {
+
+        }
         fabAddPhoto.setOnClickListener {
             takePhoto()
         }
         outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
-    }
-
-    private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(safeContext)
-        cameraProviderFuture.addListener(Runnable {
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(viewFinder.surfaceProvider)
-                }
-            imageCapture = ImageCapture.Builder()
-                .build()
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture
-                )
-            } catch (exc: Exception) {
-                Log.e(TAG, "Use case binding failed", exc)
-            }
-        }, ContextCompat.getMainExecutor(safeContext))
-    }
-
-    private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
-        val photoFile = File(
-            outputDirectory,
-            SimpleDateFormat(
-                FILENAME_FORMAT, Locale.US
-                // UA?
-            ).format(System.currentTimeMillis()) + ".jpg"
-        )
-
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
-        imageCapture.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(safeContext),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
-                }
-
-                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val savedUri = Uri.fromFile(photoFile)
-                    val msg = "Photo capture succeeded: $savedUri"
-                    Toast.makeText(safeContext, msg, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, msg)
-                }
-            })
     }
 
     override fun onRequestPermissionsResult(
@@ -132,6 +94,62 @@ class CameraFragment : Fragment() {
         }
     }
 
+    private fun takePhoto() {
+        val imageCapture = imageCapture ?: return
+        val photoFile = File(
+            outputDirectory,
+            SimpleDateFormat(
+                FILENAME_FORMAT, Locale.US
+            ).format(System.currentTimeMillis()) + ".jpeg"
+        )
+
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        imageCapture.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(safeContext),
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onError(exception: ImageCaptureException) {
+                    Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
+                }
+
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    val savedUri = Uri.fromFile(photoFile)
+                    val msg = "Photo capture succeeded: $savedUri"
+                    Toast.makeText(safeContext, msg, Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+    @SuppressLint("UnsafeOptInUsageError", "RestrictedApi")
+    private fun startCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(safeContext)
+        cameraProviderFuture.addListener(Runnable {
+            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+            val preview = Preview.Builder()
+                .build()
+                .also {
+                    it.setSurfaceProvider(previewView.surfaceProvider)
+                }
+            imageCapture = ImageCapture.Builder()
+                .setTargetResolution(Size(1920, 1080))
+                .build()
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            try {
+                cameraProvider.unbindAll()
+                camera = cameraProvider.bindToLifecycle(
+                    this, cameraSelector, preview, imageCapture
+                )
+                val characteristics = Camera2CameraInfo
+                    .extractCameraCharacteristics(camera!!.cameraInfo)
+                val allSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+                sizes = allSizes?.getHighResolutionOutputSizes(ImageFormat.JPEG)
+            } catch (exc: Exception) {
+                Log.e(TAG, "Use case binding failed", exc)
+            }
+        }, ContextCompat.getMainExecutor(safeContext))
+    }
+
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(safeContext, it) == PackageManager.PERMISSION_GRANTED
     }
@@ -143,6 +161,21 @@ class CameraFragment : Fragment() {
         return if (mediaDir != null && mediaDir.exists())
             mediaDir else activity?.filesDir!!
     }
+
+    var savePhotosFolder: String
+        get(): String {
+            var path = prefs?.getString(SAVE_PHOTOS, Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM).toString())
+            if (!File(path).exists() || !File(path).isDirectory) {
+                path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString()
+                savePhotosFolder = path
+            }
+            return path!!
+        }
+        set(path) = prefs?.edit()?.putString(SAVE_PHOTOS, path)!!.apply()
+
+
+    fun Context.getSharedPrefs() = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
 
     override fun onDestroy() {
         super.onDestroy()

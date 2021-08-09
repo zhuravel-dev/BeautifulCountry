@@ -27,4 +27,16 @@
     <string name="_15_items_on_page">15 items on page</string>
     <string name="_20_items_on_page">20 items on page</string>
     <string name="views">views</string>
+    <string name="photo">Photo</string>
+    <string name="other">other</string>
+    <string name="change">Change current camera resolution:</string>
+    <string name="making_your_device_discoverable">Making your device discoverable</string>
+    <string name="scan_for_devices">Scan for devices</string>
+    <string name="paired_devices">Paired devices</string>
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="other_available_devices">Other Available Devices</string>
+    <string name="connect">Connect</string>
 </resources>
