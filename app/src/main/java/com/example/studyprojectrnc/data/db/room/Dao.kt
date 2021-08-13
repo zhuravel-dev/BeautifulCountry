@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.data.roomForLocation
+package com.example.studyprojectrnc.data.db.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

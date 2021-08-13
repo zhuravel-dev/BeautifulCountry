@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.location
+package com.example.studyprojectrnc.services
 
 import android.Manifest
 import android.app.Notification

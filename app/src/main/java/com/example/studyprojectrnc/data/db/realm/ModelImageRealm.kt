@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.data.realmForImage
+package com.example.studyprojectrnc.data.db.realm
 
 import io.realm.RealmObject
 

@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.googleMaps
+package com.example.studyprojectrnc.ui.fragments
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
-import com.example.studyprojectrnc.ui.fragments.Communicator
+import com.example.studyprojectrnc.ui.adapters.InfoWindowCustomAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

@@ -1,6 +1,7 @@
+/*
 package com.example.studyprojectrnc.data.local
 
-import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
+import com.example.studyprojectrnc.data.db.realm.ModelImageRealm
 import io.realm.Realm
 
 class LocalSource {
@@ -15,7 +16,8 @@ class LocalSource {
 // TODO: 06.08.2021  this method saved data to the database,
 //  now this is done in the class ImagesRepositoryRealm.
 //  The method is saved for the future.
-  /*  fun saveImageRealmObjects(models: List<Response>?, callback: (List<ModelImageRealm>) -> Unit) {
+  */
+/*  fun saveImageRealmObjects(models: List<Response>?, callback: (List<ModelImageRealm>) -> Unit) {
         realm.executeTransactionAsync(
             { realm ->
                 models?.map {
@@ -25,5 +27,6 @@ class LocalSource {
             { callback.invoke(getImageRealmObjects()) },
             { callback.invoke(getImageRealmObjects()) }
         )
-    }*/
-}
+    }*//*
+
+}*/

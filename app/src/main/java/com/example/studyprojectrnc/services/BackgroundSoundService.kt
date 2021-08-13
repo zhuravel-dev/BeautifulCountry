@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.musicPlayer
+package com.example.studyprojectrnc.services
 
 import android.app.*
 import android.content.BroadcastReceiver

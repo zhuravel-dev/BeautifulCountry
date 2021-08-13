@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.googleMaps
+package com.example.studyprojectrnc.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

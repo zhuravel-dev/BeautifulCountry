@@ -1,18 +1,12 @@
-/*package com.example.studyprojectrnc.ui.fragments
+package com.example.studyprojectrnc.ui.fragments
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import com.example.studyprojectrnc.R
-import kotlinx.android.synthetic.main.fragment_bluetooth.*
 
 class BluetoothFragment : Fragment() {
 
@@ -36,7 +30,7 @@ class BluetoothFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+   /* override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_bluetooth)
         mNewDevicesArrayAdapter = ArrayAdapter(this, R.layout.device_name)
@@ -57,6 +51,6 @@ class BluetoothFragment : Fragment() {
     }
 
        this.registerReceiver(mReceiver, IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED))
-
-}*/
+*/
+}
 

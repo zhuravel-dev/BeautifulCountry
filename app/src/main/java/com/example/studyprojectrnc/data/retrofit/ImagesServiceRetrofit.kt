@@ -3,6 +3,8 @@ package com.example.studyprojectrnc.data.retrofit
 import com.example.studyprojectrnc.BuildConfig
 import com.example.studyprojectrnc.data.retrofit.model.ResponseDataList
 import com.google.gson.annotations.SerializedName
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -16,6 +18,17 @@ interface ImagesServiceRetrofit {
         @Query("per_page") per_page: Int?
     ): ResponseDataList
 }
+
+object ImagesServiceRetrofitImpl {
+        fun provideService() : ImagesServiceRetrofit {
+            val baseUrl = "https://pixabay.com/api/"
+            val retrofit = Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            return retrofit.create(ImagesServiceRetrofit::class.java)
+        }
+    }
 
 data class PagedResponse<T>(
     @SerializedName("hits") val pageInfo: PageInfo,
