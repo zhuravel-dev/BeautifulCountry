@@ -1,9 +1,9 @@
 package com.example.studyprojectrnc.data.repository
 
 import androidx.paging.PagingSource
+import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofit
 import com.example.studyprojectrnc.data.retrofit.RetrofitClientInstance
-import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
 import com.example.studyprojectrnc.data.retrofit.model.ResponseDataList
 
 class ImagesRepositoryRealm {
@@ -17,8 +17,8 @@ class ImagesRepositoryRealm {
             "22281764-aa17ceed19bc1ed0ef2893c10",
             "australia",
             "photo",
-            nextPage,
-            20
+            1,
+            10
         )
         return TransitionResponse(pageNumber++, response.toModelImageRealm())
     }

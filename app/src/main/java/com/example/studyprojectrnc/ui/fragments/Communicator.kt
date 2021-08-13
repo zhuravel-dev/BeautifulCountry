@@ -5,4 +5,5 @@ interface Communicator {
     fun navigateToMapFragment()
     fun navigateToAnimationFragment()
     fun navigateToCameraFragment()
+    fun navigateToBluetoothFragment()
 }

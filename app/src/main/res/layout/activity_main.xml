@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.activities.MainActivity">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/ivTabLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/ivPager"
+    <FrameLayout
+        android:id="@+id/mainFrame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_toEndOf="@id/ivTabLayout"
-        app:layout_constraintTop_toBottomOf="@id/ivTabLayout"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </androidx.viewpager2.widget.ViewPager2>
+        android:layout_height="match_parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

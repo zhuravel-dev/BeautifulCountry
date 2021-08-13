@@ -1,19 +1,16 @@
 package com.example.studyprojectrnc.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.ActivityMainBinding
 import com.example.studyprojectrnc.googleMaps.AnimationFragment
 import com.example.studyprojectrnc.googleMaps.MapsFragment
-import com.example.studyprojectrnc.ui.fragments.CameraFragment
-import com.example.studyprojectrnc.ui.fragments.Communicator
-import com.example.studyprojectrnc.ui.fragments.FirstFragment
-import com.example.studyprojectrnc.ui.fragments.SecondFragment
+import com.example.studyprojectrnc.ui.fragments.*
 
 var SORT = 10
 
@@ -28,7 +25,9 @@ class MainActivity : AppCompatActivity(), Communicator {
         setContentView(R.layout.activity_main)
 
         val firstFragment = FirstFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.mainFrame, firstFragment)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainFrame, firstFragment)
             .commit()
     }
 
@@ -57,8 +56,7 @@ class MainActivity : AppCompatActivity(), Communicator {
 
     override fun passAndNavigateToSecondFragment(txtView: String) {
         val transaction = this.supportFragmentManager.beginTransaction()
-        val secondFragment = SecondFragment().apply {
-        }
+        val secondFragment = SecondFragment()
         transaction.replace(R.id.mainFrame, secondFragment)
         transaction.addToBackStack(null)
         transaction.commit()
@@ -73,10 +71,10 @@ class MainActivity : AppCompatActivity(), Communicator {
     }
 
     override fun navigateToAnimationFragment() {
-        val animation = AnimationFragment()
+        val animationFragment = AnimationFragment()
         val transaction = this.supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.animation_entry, R.anim.animation_exit)
-        transaction.replace(R.id.mainFrame, animation)
+        transaction.replace(R.id.mainFrame, animationFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -88,8 +86,12 @@ class MainActivity : AppCompatActivity(), Communicator {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    override fun navigateToBluetoothFragment() {
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val bluetoothFragment = BluetoothFragment()
+        transaction.replace(R.id.mainFrame, bluetoothFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 }
-
-
-
-

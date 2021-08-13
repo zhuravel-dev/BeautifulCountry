@@ -3,13 +3,13 @@ package com.example.studyprojectrnc.googleMaps
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.ui.fragments.Communicator
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -79,6 +79,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
+        // TODO: 06.08.2021 for futures transitions to AnimationFragment
 //        communicator.navigateToAnimationFragment()
         Log.i("TAG", "In onMarkerClick")
         return true

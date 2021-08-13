@@ -13,9 +13,7 @@
         android:layout_height="480dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher_round"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-134dp"
-        tools:layout_editor_absoluteY="-152dp" />
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnExitDialog"

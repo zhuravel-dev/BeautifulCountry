@@ -1,6 +1,5 @@
 package com.example.studyprojectrnc.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import java.lang.Exception
 
 class ImageAdapter :
     PagingDataAdapter<ModelImageRealm, ImageAdapter.ViewHolder>(diffCallback) {
@@ -22,15 +19,7 @@ class ImageAdapter :
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivImage: ImageView = view.findViewById(R.id.ivImage)
         fun bind(modelImageRealm: ModelImageRealm?) {
-            Picasso.get().load(modelImageRealm?.largeImageURL).into(ivImage, object : Callback {
-                override fun onSuccess() {
-                    Log.i("TAG", "onSuccess")
-                }
-
-                override fun onError(e: Exception?) {
-                    Log.i("TAG", "onError")
-                }
-            })
+            Picasso.get().load(modelImageRealm?.largeImageURL).into(ivImage)
             itemView.setOnClickListener {
                 modelImageRealm?.let { onItemClick?.invoke(it) }
             }
