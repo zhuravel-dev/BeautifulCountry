@@ -13,24 +13,26 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.RecyclerView
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.data.repository.ImagesRepositoryRealm
-import com.example.studyprojectrnc.location.MyWorker
 import com.example.studyprojectrnc.ui.activities.SORT
 import com.example.studyprojectrnc.ui.adapters.ImageAdapter
 import com.example.studyprojectrnc.ui.paging3.ImagePaging
 import com.example.studyprojectrnc.ui.viewModel.SecondFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SecondFragment : Fragment(R.layout.fragment_second) {
 
     private var viewModel: SecondFragmentViewModel? = null
     private val customAdapter by lazy { ImageAdapter() }
 
-    private val myService = ImagesRepositoryRealm()
+    @Inject
+    lateinit var myService: ImagesRepositoryRealm
+
+    //  private val myService = ImagesRepositoryRealm(ImagesServiceRetrofit)
     private lateinit var sliding: SlidingPaneLayout
     private lateinit var rcView: RecyclerView
 
@@ -71,16 +73,16 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         //  sliding = view.findViewById(R.id.sliding)
         rcView = view.findViewById(R.id.rcView)
         subscribeToLiveData()
-        startWorker()
+ //       startWorker()
         initAdapter()
     }
 
-    private fun startWorker() {
+/*    private fun startWorker() {
         val periodicWorkRequest = PeriodicWorkRequest
             .Builder(MyWorker::class.java, 15, TimeUnit.MINUTES)
             .build()
         WorkManager.getInstance().enqueue(periodicWorkRequest)
-    }
+    }*/
 
     private fun subscribeToLiveData() {
         lifecycleScope.launchWhenCreated {
@@ -91,4 +93,3 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         }
     }
 }
-

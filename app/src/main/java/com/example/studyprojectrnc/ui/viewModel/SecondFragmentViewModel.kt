@@ -4,11 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
-import com.example.studyprojectrnc.data.repository.ImagesRepositoryRealm
+import com.example.studyprojectrnc.data.db.realm.ModelImageRealm
 
-class SecondFragmentViewModel : ViewModel() {
-    private val repository = ImagesRepositoryRealm()
+class SecondFragmentViewModel() : ViewModel() {
+ //   private val repository = ImagesRepositoryRealm()
     private val _showProgress = MutableLiveData<Boolean>()
     val showProgress: LiveData<Boolean> = _showProgress
     private val _models = MutableLiveData<List<ModelImageRealm>>()
@@ -19,4 +18,3 @@ class SecondFragmentViewModel : ViewModel() {
         _showProgress.postValue(true)
     }
 }
-

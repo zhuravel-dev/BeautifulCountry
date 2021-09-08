@@ -1,19 +1,17 @@
 package com.example.studyprojectrnc.data.repository
 
 import androidx.paging.PagingSource
-import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
+import com.example.studyprojectrnc.data.db.realm.ModelImageRealm
 import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofit
-import com.example.studyprojectrnc.data.retrofit.RetrofitClientInstance
 import com.example.studyprojectrnc.data.retrofit.model.ResponseDataList
+import javax.inject.Inject
 
-class ImagesRepositoryRealm {
+class ImagesRepositoryRealm @Inject constructor(private val api: ImagesServiceRetrofit) {
     private var pageNumber = 0
-    private val remoteSource =
-        RetrofitClientInstance.getRetrofitInstance().create(ImagesServiceRetrofit::class.java)
 
     suspend fun getDataFromRemoteAndSaveToLocal(params: PagingSource.LoadParams<Int>): TransitionResponse {
         val nextPage = params.key ?: 1
-        val response = remoteSource.getContent(
+        val response = api.getContent(
             "22281764-aa17ceed19bc1ed0ef2893c10",
             "australia",
             "photo",

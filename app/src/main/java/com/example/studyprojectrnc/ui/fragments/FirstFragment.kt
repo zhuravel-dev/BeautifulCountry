@@ -12,11 +12,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentFirstBinding
-import com.example.studyprojectrnc.location.LocationService
-import com.example.studyprojectrnc.location.Util
+import com.example.studyprojectrnc.services.LocationService
+import com.example.studyprojectrnc.utils.Util
+import dagger.hilt.android.AndroidEntryPoint
 
 const val CODE = 200
 
+@AndroidEntryPoint
 class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
     private lateinit var communicator: Communicator
@@ -102,8 +104,3 @@ class FirstFragment : Fragment() {
         super.onDestroyView()
     }
 }
-
-
-
-
-

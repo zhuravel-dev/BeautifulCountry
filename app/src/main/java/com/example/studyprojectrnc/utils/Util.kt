@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.location
+package com.example.studyprojectrnc.utils
 
 import android.app.Activity
 import android.app.ActivityManager

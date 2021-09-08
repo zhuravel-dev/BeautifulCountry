@@ -8,12 +8,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.ActivityMainBinding
-import com.example.studyprojectrnc.googleMaps.AnimationFragment
-import com.example.studyprojectrnc.googleMaps.MapsFragment
 import com.example.studyprojectrnc.ui.fragments.*
+import dagger.hilt.android.AndroidEntryPoint
 
 var SORT = 10
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), Communicator {
 
     lateinit var binding: ActivityMainBinding

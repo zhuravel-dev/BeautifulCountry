@@ -2,7 +2,7 @@ package com.example.studyprojectrnc.ui.paging3
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
+import com.example.studyprojectrnc.data.db.realm.ModelImageRealm
 import com.example.studyprojectrnc.data.repository.ImagesRepositoryRealm
 
 class ImagePaging(private val service: ImagesRepositoryRealm) :

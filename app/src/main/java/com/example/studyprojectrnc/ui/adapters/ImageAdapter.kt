@@ -8,7 +8,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studyprojectrnc.R
-import com.example.studyprojectrnc.data.realmForImage.ModelImageRealm
+import com.example.studyprojectrnc.data.db.realm.ModelImageRealm
 import com.squareup.picasso.Picasso
 
 class ImageAdapter :

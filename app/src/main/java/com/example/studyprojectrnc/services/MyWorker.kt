@@ -1,4 +1,5 @@
-package com.example.studyprojectrnc.location
+/*
+package com.example.studyprojectrnc.services
 
 import android.content.Context
 import android.content.Intent
@@ -6,12 +7,17 @@ import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.studyprojectrnc.data.repository.LocationRepositoryRoom
-import com.example.studyprojectrnc.musicPlayer.BackgroundSoundService
+import javax.inject.Inject
+
+TODO fix this with Assisted Inject
+ https://proandroiddev.com/dagger-2-setup-with-workmanager-a-complete-step-by-step-guild-bb9f474bde37
 
 class MyWorker constructor(
     val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
+
+    @Inject
 
     private val repository by lazy { LocationRepositoryRoom(context) }
 
@@ -29,4 +35,4 @@ class MyWorker constructor(
             Result.failure()
         }
     }
-}
+}*/
