@@ -19,17 +19,6 @@ interface ImagesServiceRetrofit {
     ): ResponseDataList
 }
 
-object ImagesServiceRetrofitImpl {
-        fun provideService() : ImagesServiceRetrofit {
-            val baseUrl = "https://pixabay.com/api/"
-            val retrofit = Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            return retrofit.create(ImagesServiceRetrofit::class.java)
-        }
-    }
-
 data class PagedResponse<T>(
     @SerializedName("hits") val pageInfo: PageInfo,
     val results: List<T> = listOf()
