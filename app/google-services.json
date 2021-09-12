@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "183285812964",
+    "project_id": "study-project-rnc",
+    "storage_bucket": "study-project-rnc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183285812964:android:3a6eebc6f7d048e9ce26f1",
+        "android_client_info": {
+          "package_name": "com.example.studyprojectrnc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183285812964-2uemks6tc5ljrfa7tcahclkh2pnbogku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDWWaim3V6onUmZ4ISIpV1E8POFfOTHBc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183285812964-2uemks6tc5ljrfa7tcahclkh2pnbogku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

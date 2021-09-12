@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 var SORT = 10
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), Communicator {
 
@@ -30,6 +29,7 @@ class MainActivity : AppCompatActivity(), Communicator {
             .beginTransaction()
             .replace(R.id.mainFrame, firstFragment)
             .commit()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
