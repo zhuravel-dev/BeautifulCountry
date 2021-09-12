@@ -32,6 +32,7 @@ android {
         buildConfigField "String", "key", "\"22281764-aa17ceed19bc1ed0ef2893c10\""
         buildConfigField "String", "q", "\"australia\""
         buildConfigField "String", "imageType", "\"photo\""
+        buildConfigField "String", "PREF_NAME", "\"AppPreferences\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,6 +56,11 @@ realm {
 }
 
 dependencies {
+    implementation "com.jakewharton.timber:timber:4.7.1"
+    implementation "com.google.firebase:firebase-crashlytics-ktx"
+    implementation "com.google.firebase:firebase-analytics-ktx"
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.38.1"
     implementation "androidx.camera:camera-camera2:1.0.1"

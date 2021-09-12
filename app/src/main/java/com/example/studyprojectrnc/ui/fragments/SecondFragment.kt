@@ -21,6 +21,7 @@ import com.example.studyprojectrnc.ui.paging3.ImagePaging
 import com.example.studyprojectrnc.ui.viewModel.SecondFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,6 +50,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
             println("${largeImage.largeImageURL}")
             openDetails(largeImage.largeImageURL)
         }
+        Timber.i("Init Adapter")
         rcView.adapter = customAdapter
     }
 

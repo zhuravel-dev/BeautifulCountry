@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.example.studyprojectrnc.databinding.BiometricBinding
+import timber.log.Timber
 import java.util.concurrent.Executor
 
 class BiometricActivity : AppCompatActivity() {
@@ -26,6 +27,7 @@ class BiometricActivity : AppCompatActivity() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
                     binding.tvBiometric.text = "Authentication Error: $errString"
+                    Timber.i("In BiometricActivity")
                     Toast.makeText(
                         this@BiometricActivity,
                         "Authentication Error: $errString",
@@ -36,6 +38,7 @@ class BiometricActivity : AppCompatActivity() {
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
                     binding.tvBiometric.text = "Authentication Failed"
+                    Timber.i("In BiometricActivity: authentication failed")
                     Toast.makeText(
                         this@BiometricActivity,
                         "Auth failed", Toast.LENGTH_SHORT
@@ -45,6 +48,7 @@ class BiometricActivity : AppCompatActivity() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
                     binding.tvBiometric.text = "Authentication succeed"
+                    Timber.i("In BiometricActivity: authentication succeed")
                     Toast.makeText(
                         this@BiometricActivity, "Auth succeed", Toast.LENGTH_SHORT
                     ).show()
