@@ -24,7 +24,7 @@ class ImagesRepositoryRealm @Inject constructor(private val api: ImagesServiceRe
 
 data class TransitionResponse(val nextPageNumber: Int, val listMM: List<ModelImageRealm>)
 
-private fun ResponseDataList.toModelImageRealm(): List<ModelImageRealm> {
+fun ResponseDataList.toModelImageRealm(): List<ModelImageRealm> {
     return this.images?.map {
         ModelImageRealm(views = it.views, largeImageURL = it.largeImageURL)
     } ?: listOf()

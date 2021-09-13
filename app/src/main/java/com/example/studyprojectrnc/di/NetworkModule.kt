@@ -4,13 +4,14 @@ import android.content.Context
 import androidx.room.Room
 import com.example.studyprojectrnc.data.db.room.RoomDB
 import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofit
-import com.example.studyprojectrnc.data.retrofit.ImagesServiceRetrofitImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -18,7 +19,12 @@ open class NetworkModule {
 
     @Provides
     fun providePixabayApi () : ImagesServiceRetrofit {
-        return ImagesServiceRetrofitImpl.provideService()
+        val baseUrl = "https://pixabay.com/api/"
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(ImagesServiceRetrofit::class.java)
     }
 
     @Provides
