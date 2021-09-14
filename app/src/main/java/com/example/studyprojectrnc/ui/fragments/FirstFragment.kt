@@ -15,6 +15,7 @@ import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 import com.example.studyprojectrnc.services.LocationService
 import com.example.studyprojectrnc.utils.Util
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 const val CODE = 200
 
@@ -51,6 +52,8 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val thisActivity = this@FirstFragment
+
+        Timber.i("In FirstFragment")
 
         if (!Util.isLocationEnabledOrNot(requireContext())) {
             Util.showAlertLocation(

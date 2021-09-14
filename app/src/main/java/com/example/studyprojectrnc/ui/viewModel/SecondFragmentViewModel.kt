@@ -1,10 +1,10 @@
 package com.example.studyprojectrnc.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.studyprojectrnc.data.db.realm.ModelImageRealm
+import timber.log.Timber
 
 class SecondFragmentViewModel() : ViewModel() {
  //   private val repository = ImagesRepositoryRealm()
@@ -14,7 +14,8 @@ class SecondFragmentViewModel() : ViewModel() {
     val models: LiveData<List<ModelImageRealm>> = _models
 
     fun fetchData(query: String = "australia") {
-        Log.i("TAG", "In ViewModel, fun fetchData")
+        Timber.i("In ViewModel, fun fetchData")
+
         _showProgress.postValue(true)
     }
 }

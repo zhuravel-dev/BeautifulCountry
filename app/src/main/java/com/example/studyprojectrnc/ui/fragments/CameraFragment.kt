@@ -2,7 +2,6 @@ package com.example.studyprojectrnc.ui.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.ImageFormat
@@ -11,7 +10,6 @@ import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
 import kotlinx.android.synthetic.main.fragment_camera.*
+import timber.log.Timber
 import java.io.File
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -52,6 +51,7 @@ class CameraFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Timber.i("In CameraFragment")
         return inflater.inflate(R.layout.fragment_camera, container, false)
     }
 
@@ -110,7 +110,7 @@ class CameraFragment : Fragment() {
             ContextCompat.getMainExecutor(safeContext),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exception: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
+                    Timber.e("Photo capture failed: ${exception.message}")
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
@@ -145,7 +145,7 @@ class CameraFragment : Fragment() {
                 val allSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
                 sizes = allSizes?.getHighResolutionOutputSizes(ImageFormat.JPEG)
             } catch (exc: Exception) {
-                Log.e(TAG, "Use case binding failed", exc)
+                Timber.e(exc, "Use case binding failed")
             }
         }, ContextCompat.getMainExecutor(safeContext))
     }
