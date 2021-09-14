@@ -5,7 +5,6 @@ import com.example.studyprojectrnc.utils.AppPreferences
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 
-
 class ReleaseTree (private val appPreferences: AppPreferences) : Timber.Tree() {
 
    companion object {

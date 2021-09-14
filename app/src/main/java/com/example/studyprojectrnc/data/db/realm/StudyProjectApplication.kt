@@ -10,7 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class RealmApplication : Application() {
+class StudyProjectApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

@@ -16,7 +16,7 @@
     <uses-feature android:name="android.hardware.bluetooth" android:required="true"/>
 
     <application
-        android:name=".data.db.realm.RealmApplication"
+        android:name=".data.db.realm.StudyProjectApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"

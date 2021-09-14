@@ -15,6 +15,7 @@ class SecondFragmentViewModel() : ViewModel() {
 
     fun fetchData(query: String = "australia") {
         Timber.i("In ViewModel, fun fetchData")
+
         _showProgress.postValue(true)
     }
 }
