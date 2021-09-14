@@ -5,8 +5,13 @@ import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import com.example.studyprojectrnc.R
 
 class BluetoothFragment : Fragment() {
 
@@ -30,10 +35,10 @@ class BluetoothFragment : Fragment() {
         }
     }
 
-   /* override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_bluetooth)
-        mNewDevicesArrayAdapter = ArrayAdapter(this, R.layout.device_name)
+  //      setContentView(R.layout.fragment_bluetooth)
+   //     mNewDevicesArrayAdapter = ArrayAdapter(this, R.layout.device_name)
     }
 
     override fun onCreateView(
@@ -41,16 +46,15 @@ class BluetoothFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.fragment_bluetooth, container, false)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mBtAdapter?.cancelDiscovery()
-        unregisterReceiver(mReceiver)
+  //      mBtAdapter?.cancelDiscovery()
+  //      unregisterReceiver(mReceiver)
     }
 
-       this.registerReceiver(mReceiver, IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED))
-*/
+    //   this.registerReceiver(mReceiver, IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED))
 }
 
