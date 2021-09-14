@@ -24,6 +24,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
+import com.example.studyprojectrnc.databinding.FragmentCameraBinding
+import com.example.studyprojectrnc.databinding.FragmentFirstBinding
 import kotlinx.android.synthetic.main.fragment_camera.*
 import java.io.File
 import java.util.*
@@ -35,6 +37,7 @@ const val SAVE_PHOTOS = "save_photos"
 
 class CameraFragment : Fragment() {
 
+ //   private lateinit var binding: FragmentCameraBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
@@ -53,6 +56,7 @@ class CameraFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_camera, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
