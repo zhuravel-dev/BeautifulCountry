@@ -1,11 +1,12 @@
-package com.example.studyprojectrnc.ui.paging3
+/*package com.example.studyprojectrnc.ui.paging3
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.studyprojectrnc.data.db.realm.ModelImageRealm
-import com.example.studyprojectrnc.data.repository.ImagesRepositoryRealm
+import com.example.studyprojectrnc.data.dataSource.local.model.ModelImageRealm
+import com.example.studyprojectrnc.domain.repository.ImagesRepository
 
-class ImagePaging(private val service: ImagesRepositoryRealm) :
+
+class ImagePaging(private val service: ImagesRepository) :
     PagingSource<Int, ModelImageRealm>() {
 
     override fun getRefreshKey(state: PagingState<Int, ModelImageRealm>): Int? {
@@ -25,4 +26,4 @@ class ImagePaging(private val service: ImagesRepositoryRealm) :
             LoadResult.Error(e)
         }
     }
-}
+}*/

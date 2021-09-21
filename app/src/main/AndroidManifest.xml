@@ -17,7 +17,7 @@
     <uses-feature android:name="android.hardware.bluetooth" android:required="true"/>
 
     <application
-        android:name=".data.db.realm.StudyProjectApplication"
+        android:name=".presentation.StudyProjectApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".presentation.MainActivity"
             android:windowSoftInputMode="adjustResize" />
 
         <receiver

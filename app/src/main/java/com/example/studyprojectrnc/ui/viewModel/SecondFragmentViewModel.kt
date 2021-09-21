@@ -1,3 +1,4 @@
+/*
 package com.example.studyprojectrnc.ui.viewModel
 
 import androidx.lifecycle.LiveData
@@ -18,4 +19,4 @@ class SecondFragmentViewModel() : ViewModel() {
 
         _showProgress.postValue(true)
     }
-}
+}*/

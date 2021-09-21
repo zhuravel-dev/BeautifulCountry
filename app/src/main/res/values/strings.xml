@@ -39,4 +39,6 @@
     <string name="none_found">No devices found</string>
     <string name="other_available_devices">Other Available Devices</string>
     <string name="connect">Connect</string>
+    <string name="Error">Error</string>
+    <string name="Nothing_to_show">Nothing to show!</string>
 </resources>

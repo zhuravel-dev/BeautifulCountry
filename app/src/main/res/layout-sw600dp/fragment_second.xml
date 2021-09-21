@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.SecondFragment">
+    tools:context=".presentation.secondScreen.SecondFragment">
 
 <androidx.slidingpanelayout.widget.SlidingPaneLayout
     android:id="@+id/sliding"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.SecondFragment">
+    tools:context=".presentation.secondScreen.SecondFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcView"

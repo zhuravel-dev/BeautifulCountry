@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graf"
+    app:startDestination="@id/firstFragment">
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.studyprojectrnc.presentation.firstScreen.FirstFragment"
+        android:label="FirstFragment" >
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
+        <action
+            android:id="@+id/action_firstFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_firstFragment_to_bluetoothFragment"
+            app:destination="@id/bluetoothFragment" />
+        <action
+            android:id="@+id/action_firstFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.example.studyprojectrnc.presentation.secondScreen.SecondFragment"
+        android:label="SecondFragment" />
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.studyprojectrnc.presentation.CameraFragment"
+        android:label="CameraFragment" />
+    <fragment
+        android:id="@+id/bluetoothFragment"
+        android:name="com.example.studyprojectrnc.presentation.BluetoothFragment"
+        android:label="BluetoothFragment" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.studyprojectrnc.presentation.MapsFragment"
+        android:label="MapsFragment" />
+</navigation>
