@@ -1,5 +1,6 @@
-package com.example.studyprojectrnc.ui.adapters
+package com.example.studyprojectrnc.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ class InfoWindowCustomAdapter(private val context: Context) : GoogleMap.InfoWind
 
     override fun getInfoWindow(p0: Marker): View? = null
 
+    @SuppressLint("InflateParams")
     override fun getInfoContents(p0: Marker): View? {
         val view = LayoutInflater.from(context).inflate(R.layout.info_window, null)
         val image = view.findViewById<ImageView>(R.id.ivRandom)

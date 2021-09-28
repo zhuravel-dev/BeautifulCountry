@@ -6,7 +6,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.studyprojectrnc.R
-import com.example.studyprojectrnc.ui.activities.MainActivity
+import com.example.studyprojectrnc.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

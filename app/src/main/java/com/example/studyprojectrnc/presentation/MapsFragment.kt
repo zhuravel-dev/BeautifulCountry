@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
+import com.example.studyprojectrnc.presentation.adapters.InfoWindowCustomAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,7 +20,7 @@ import timber.log.Timber
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-   // private lateinit var communicator: Communicator
+    // private lateinit var communicator: Communicator
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +49,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     override fun onMapReady(map: GoogleMap) {
 
-     //   map.setInfoWindowAdapter(InfoWindowCustomAdapter(requireContext()))
+        map.setInfoWindowAdapter(InfoWindowCustomAdapter(requireContext()))
 
         val sydney = LatLng(-34.0, 151.0)
         map.addMarker(
