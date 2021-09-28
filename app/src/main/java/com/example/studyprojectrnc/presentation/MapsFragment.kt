@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.presentation.adapters.InfoWindowCustomAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -19,8 +20,6 @@ import com.google.android.gms.maps.model.*
 import timber.log.Timber
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-
-    // private lateinit var communicator: Communicator
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,8 +78,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        // TODO: 06.08.2021 for futures transitions to AnimationFragment
-//        communicator.navigateToAnimationFragment()
+        val navController = Navigation.findNavController(requireView())
+        navController.navigate(R.id.action_mapsFragment_to_animationFragment)
         Timber.i("In onMarkerClick")
         return true
     }
