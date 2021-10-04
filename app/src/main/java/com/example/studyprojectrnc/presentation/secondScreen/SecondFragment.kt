@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentSecondBinding
 import com.example.studyprojectrnc.domain.DataState
@@ -23,8 +24,9 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>() {
 
     private fun initAdapter() {
         customAdapter.onItemClick = { largeImage ->
+            val navController = Navigation.findNavController(requireView())
+            navController.navigate(R.id.action_secondFragment_to_imageDetailScreen)
             println("${largeImage.largeImageURL}")
-            //openDetails(largeImage.largeImageURL)
         }
         Timber.i("In fun init adapter")
         binding.rcView.adapter = customAdapter

@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.ui.fragments
+package com.example.studyprojectrnc.presentation.map
 
 import android.os.Bundle
 import android.view.LayoutInflater

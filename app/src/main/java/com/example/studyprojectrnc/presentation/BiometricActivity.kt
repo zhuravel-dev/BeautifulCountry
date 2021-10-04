@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.ui.activities
+package com.example.studyprojectrnc.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.example.studyprojectrnc.databinding.BiometricBinding
-import com.example.studyprojectrnc.presentation.MainActivity
 import timber.log.Timber
 import java.util.concurrent.Executor
 
