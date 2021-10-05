@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentSecondBinding
 import com.example.studyprojectrnc.domain.DataState
+import com.example.studyprojectrnc.presentation.ImageDetailScreenDialog
 import com.example.studyprojectrnc.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_second.*
@@ -20,13 +21,13 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>() {
     private val viewModel: SecondFragmentVM by viewModels()
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSecondBinding
         get() = FragmentSecondBinding::inflate
+    private val imageDialogDetail = ImageDetailScreenDialog(this)
     private val customAdapter by lazy { ImageAdapter() }
 
     private fun initAdapter() {
         customAdapter.onItemClick = { largeImage ->
-            val navController = Navigation.findNavController(requireView())
-            navController.navigate(R.id.action_secondFragment_to_imageDetailScreen)
             println("${largeImage.largeImageURL}")
+            imageDialogDetail.startShowing(largeImage.largeImageURL, largeImage.views)
         }
         Timber.i("In fun init adapter")
         binding.rcView.adapter = customAdapter

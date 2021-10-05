@@ -28,10 +28,12 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import com.example.studyprojectrnc.R
+import dagger.hilt.android.AndroidEntryPoint
 
 const val PREFS_KEY = "Prefs"
 const val SAVE_PHOTOS = "save_photos"
 
+@AndroidEntryPoint
 class CameraFragment : Fragment() {
 
     private var imageCapture: ImageCapture? = null

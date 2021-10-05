@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graf"
     app:startDestination="@id/firstFragment">
 
@@ -25,11 +24,7 @@
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.example.studyprojectrnc.presentation.secondScreen.SecondFragment"
-        android:label="SecondFragment" >
-        <action
-            android:id="@+id/action_secondFragment_to_imageDetailScreen"
-            app:destination="@id/imageDetailScreen" />
-    </fragment>
+        android:label="SecondFragment" />
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.example.studyprojectrnc.presentation.CameraFragment"
@@ -48,11 +43,6 @@
     </fragment>
     <fragment
         android:id="@+id/animationFragment"
-        android:name="com.example.studyprojectrnc.presentation.AnimationFragment"
+        android:name="com.example.studyprojectrnc.presentation.map.AnimationFragment"
         android:label="AnimationFragment" />
-    <fragment
-        android:id="@+id/imageDetailScreen"
-        android:name="com.example.studyprojectrnc.presentation.ImageDetailScreen"
-        android:label="dialog_detail_screen"
-        tools:layout="@layout/dialog_detail_screen" />
 </navigation>
