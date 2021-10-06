@@ -11,7 +11,7 @@
         android:layout_marginStart="0dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:src="@drawable/placeholder" />
+        android:src="@drawable/placeholder_for_music_player" />
 
     <TextView
         android:id="@+id/ivSongName"

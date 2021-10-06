@@ -10,7 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class StudyProjectApplication : Application() {
+class BeautifulCountryApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

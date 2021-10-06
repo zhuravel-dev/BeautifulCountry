@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Study Project RnC</string>
+    <string name="app_name">Beautiful Country: Australia</string>
     <string name="welcome">Hello! Today is:</string>
     <string name="txtNeedBiometric">Click button for authentication!</string>
     <string name="txtBtnBiometric">Authentication</string>

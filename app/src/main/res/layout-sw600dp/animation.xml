@@ -6,5 +6,5 @@
     android:layout_width="350dp"
     android:layout_height="350dp"
     android:layout_gravity="center"
-    app:srcCompat="@drawable/australia"
+    app:srcCompat="@drawable/theatre_image"
     tools:ignore="ContentDescription" />
