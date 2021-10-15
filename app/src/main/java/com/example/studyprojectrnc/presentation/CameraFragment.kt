@@ -8,11 +8,15 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
@@ -51,8 +55,8 @@ class CameraFragment : Fragment() {
     private val fragmentCameraBinding get() = _fragmentCameraBinding!!
     private var cameraUiContainerBinding: CameraUiConteinerBinding? = null
 
-    private lateinit var outputDirectory: File
-    private lateinit var broadcastManager: LocalBroadcastManager
+    private var outputDirectory: File? = null
+    private var broadcastManager: LocalBroadcastManager? = null
 
     private var displayId: Int = -1
     private var lensFacing: Int = CameraSelector.LENS_FACING_BACK
@@ -63,11 +67,11 @@ class CameraFragment : Fragment() {
     private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
 
-    private lateinit var windowManager: WindowManager
+    private var windowManager: WindowManager? = null
     private var cameraProvider: ProcessCameraProvider? = null
 
-    private lateinit var cameraExecutor: ExecutorService
-    private lateinit var safeContext: Context
+    private var cameraExecutor: ExecutorService? = null
+    private var safeContext: Context? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -90,7 +94,9 @@ class CameraFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
-                updateCameraUi()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    updateCameraUi()
+                }
                 setUpCamera()
             } else {
                 Toast.makeText(
@@ -117,7 +123,9 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (allPermissionsGranted()) {
-            updateCameraUi()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                updateCameraUi()
+            }
             setUpCamera()
         } else {
             ActivityCompat.requestPermissions(
@@ -131,14 +139,18 @@ class CameraFragment : Fragment() {
         broadcastManager = LocalBroadcastManager.getInstance(view.context)
         fragmentCameraBinding.previewView.post {
             displayId = fragmentCameraBinding.previewView.display.displayId
-            updateCameraUi()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                updateCameraUi()
+            }
             setUpCamera()
         }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        bindCameraUseCases()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            bindCameraUseCases()
+        }
         updateCameraSwitchButton()
     }
 
@@ -154,17 +166,20 @@ class CameraFragment : Fragment() {
                 else -> throw IllegalStateException("Back and front camera are unavailable")
             }
             updateCameraSwitchButton()
-            bindCameraUseCases()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                bindCameraUseCases()
+            }
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun bindCameraUseCases() {
 
-        val metrics = windowManager.currentWindowMetrics.bounds
-        Timber.i("Screen metrics: ${metrics.width()} x ${metrics.height()}")
+        val metrics = windowManager?.currentWindowMetrics?.bounds
+        Timber.i("Screen metrics: ${metrics?.width()} x ${metrics?.height()}")
 
-        val screenAspectRatio = aspectRatio(metrics.width(), metrics.height())
+        val screenAspectRatio = metrics?.width()?.let { aspectRatio(it, metrics?.height()) }
         Timber.i("Preview aspect ratio: $screenAspectRatio")
 
         val rotation = fragmentCameraBinding.previewView.display.rotation
@@ -174,26 +189,34 @@ class CameraFragment : Fragment() {
 
         val cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
 
-        preview = Preview.Builder()
-            .setTargetAspectRatio(screenAspectRatio)
-            .setTargetRotation(rotation)
-            .build()
+        preview = screenAspectRatio?.let {
+            Preview.Builder()
+                .setTargetAspectRatio(it)
+                .setTargetRotation(rotation)
+                .build()
+        }
 
-        imageCapture = ImageCapture.Builder()
-            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-            .setTargetAspectRatio(screenAspectRatio)
-            .setTargetRotation(rotation)
-            .build()
+        imageCapture = screenAspectRatio?.let {
+            ImageCapture.Builder()
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .setTargetAspectRatio(it)
+                .setTargetRotation(rotation)
+                .build()
+        }
 
-        imageAnalyzer = ImageAnalysis.Builder()
-            .setTargetAspectRatio(screenAspectRatio)
-            .setTargetRotation(rotation)
-            .build()
-            .also {
-                it.setAnalyzer(cameraExecutor, LuminosityAnalyzer { luma ->
-                    Timber.i("Average luminosity: $luma")
-                })
-            }
+        imageAnalyzer = screenAspectRatio?.let {
+            ImageAnalysis.Builder()
+                .setTargetAspectRatio(it)
+                .setTargetRotation(rotation)
+                .build()
+                .also {
+                    cameraExecutor?.let { it1 ->
+                        it.setAnalyzer(it1, LuminosityAnalyzer { luma ->
+                            Timber.i("Average luminosity: $luma")
+                        })
+                    }
+                }
+        }
 
         cameraProvider.unbindAll()
 
@@ -207,6 +230,7 @@ class CameraFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun updateCameraUi() {
         cameraUiContainerBinding?.root?.let {
             fragmentCameraBinding.root.removeView(it)
@@ -217,7 +241,7 @@ class CameraFragment : Fragment() {
             true
         )
         lifecycleScope.launch(Dispatchers.IO) {
-            outputDirectory.listFiles { file ->
+            outputDirectory?.listFiles { file ->
                 EXTENSION_WHITELIST.contains(file.extension.toUpperCase(Locale.ROOT))
             }?.maxOrNull()?.let {
                 setGalleryThumbnail(Uri.fromFile(it))
@@ -233,19 +257,21 @@ class CameraFragment : Fragment() {
                 val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile)
                     .setMetadata(metadata)
                     .build()
-                imageCapture.takePicture(
-                    outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
-                        override fun onError(exc: ImageCaptureException) {
-                            Timber.e("Photo capture failed: ${exc.message}")
-                        }
+                cameraExecutor?.let { it1 ->
+                    imageCapture.takePicture(
+                        outputOptions, it1, object : ImageCapture.OnImageSavedCallback {
+                            override fun onError(exc: ImageCaptureException) {
+                                Timber.e("Photo capture failed: ${exc.message}")
+                            }
 
-                        override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                            val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
-                            Timber.i("Photo capture failed")
+                            override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                                val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
+                                Timber.i("Photo capture failed")
 
-                            setGalleryThumbnail(savedUri)
-                        }
-                    })
+                                setGalleryThumbnail(savedUri)
+                            }
+                        })
+                }
 
                 fragmentCameraBinding.root.postDelayed({
                     fragmentCameraBinding.root.foreground = ColorDrawable(Color.WHITE)
@@ -264,17 +290,19 @@ class CameraFragment : Fragment() {
                 } else {
                     CameraSelector.LENS_FACING_FRONT
                 }
-                bindCameraUseCases()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    bindCameraUseCases()
+                }
             }
         }
 
         cameraUiContainerBinding?.photoViewButton?.setOnClickListener {
-            if (true == outputDirectory.listFiles()?.isNotEmpty()) {
+            if (true == outputDirectory?.listFiles()?.isNotEmpty()) {
                 Navigation.findNavController(
                     requireActivity(), R.id.nav_host_fragment
                 ).navigate(
                     CameraFragmentDirections
-                        .actionCameraFragmentToGalleryFragment(outputDirectory.absolutePath)
+                        .actionCameraFragmentToGalleryFragment(outputDirectory!!.absolutePath)
                 )
             }
         }
@@ -355,7 +383,7 @@ class CameraFragment : Fragment() {
     }*/
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(safeContext, it) == PackageManager.PERMISSION_GRANTED
+        safeContext?.let { it1 -> ContextCompat.checkSelfPermission(it1, it) } == PackageManager.PERMISSION_GRANTED
     }
 
     private fun getOutputDirectory(): File {
@@ -389,7 +417,7 @@ class CameraFragment : Fragment() {
     override fun onDestroy() {
         _fragmentCameraBinding = null
         super.onDestroy()
-        cameraExecutor.shutdown()
+        cameraExecutor?.shutdown()
     }
 
     private fun aspectRatio(width: Int, height: Int): Int {
@@ -453,7 +481,7 @@ class CameraFragment : Fragment() {
         private const val RATIO_16_9_VALUE = 16.0 / 9.0
         private const val PHOTO_EXTENSION = ".jpg"
 
-        private fun createFile(baseFolder: File, format: String, extension: String) =
+        private fun createFile(baseFolder: File?, format: String, extension: String) =
             File(
                 baseFolder, java.text.SimpleDateFormat(format, Locale.US)
                     .format(System.currentTimeMillis()) + extension

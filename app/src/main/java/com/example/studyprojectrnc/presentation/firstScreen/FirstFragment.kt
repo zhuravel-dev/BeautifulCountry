@@ -27,26 +27,30 @@ class FirstFragment : Fragment() {
         val buttonNext = view.findViewById<FloatingActionButton>(R.id.btnNext)
         buttonNext.setOnClickListener {
             navController.navigate(R.id.action_firstFragment_to_secondFragment)
-            Timber.i("Navigation to SecondFragment")
+            logNavigation("SecondFragment")
         }
 
         val buttonCamera = view.findViewById<FloatingActionButton>(R.id.btnCamera)
         buttonCamera.setOnClickListener {
             navController.navigate(R.id.action_firstFragment_to_cameraFragment)
-            Timber.i("Navigation to CameraFragment")
+            logNavigation("CameraFragment")
         }
 
         val buttonBluetooth = view.findViewById<FloatingActionButton>(R.id.btnBluetooth)
         buttonBluetooth.setOnClickListener {
             navController.navigate(R.id.action_firstFragment_to_bluetoothFragment)
-            Timber.i("Navigation to BluetoothFragment")
+            logNavigation("BluetoothFragment")
         }
 
         val buttonMap = view.findViewById<FloatingActionButton>(R.id.btnMap)
         buttonMap.setOnClickListener {
             navController.navigate(R.id.action_firstFragment_to_mapsFragment)
-            Timber.i("Navigation to MapFragment")
+            logNavigation("MapsFragment")
         }
 
+    }
+
+    private fun logNavigation(s: String) {
+        Timber.i("Navigation to $s")
     }
 }

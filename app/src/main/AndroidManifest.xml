@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.studyprojectrnc">
 
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -18,6 +17,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <uses-feature
         android:name="android.hardware.bluetooth"
@@ -47,15 +48,15 @@
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".presentation.MainActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
 
-        <receiver
+        <!--<receiver
             android:name=".services.RestartBackgroundService"
             android:enabled="true"
             android:exported="true">
@@ -63,7 +64,7 @@
                 <action android:name="restartservice" />
             </intent-filter>
 
-            <!-- Register as a system camera app -->
+            &lt;!&ndash; Register as a system camera app &ndash;&gt;
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA"/>
@@ -71,12 +72,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
 
-        </receiver>
+        </receiver>-->
 
-        <service
-            android:name=".services.LocationService"
-            android:enabled="true"
-            android:exported="true" />
     </application>
-
 </manifest>
