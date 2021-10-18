@@ -1,3 +1,4 @@
+/*
 package com.example.studyprojectrnc.presentation
 
 import android.Manifest
@@ -325,7 +326,8 @@ class CameraFragment : Fragment() {
     }
 
 
-    /*private fun takePhoto() {
+    */
+/*private fun takePhoto() {
         val imageCapture = imageCapture ?: return
         val photoFile = File(
             outputDirectory,
@@ -380,7 +382,8 @@ class CameraFragment : Fragment() {
                 Timber.e(exc, "Use case binding failed")
             }
         }, ContextCompat.getMainExecutor(safeContext))
-    }*/
+    }*//*
+
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         safeContext?.let { it1 -> ContextCompat.checkSelfPermission(it1, it) } == PackageManager.PERMISSION_GRANTED
@@ -394,7 +397,8 @@ class CameraFragment : Fragment() {
             mediaDir else activity?.filesDir!!
     }
 
-    /*var savePhotosFolder: String
+    */
+/*var savePhotosFolder: String
         get(): String {
             var path = prefs?.getString(
                 SAVE_PHOTOS, Environment.getExternalStoragePublicDirectory(
@@ -408,7 +412,8 @@ class CameraFragment : Fragment() {
             }
             return path!!
         }
-        set(path) = prefs?.edit()?.putString(SAVE_PHOTOS, path)!!.apply()*/
+        set(path) = prefs?.edit()?.putString(SAVE_PHOTOS, path)!!.apply()*//*
+
 
 
     private fun Context.getSharedPrefs(): SharedPreferences =
@@ -489,3 +494,4 @@ class CameraFragment : Fragment() {
     }
 }
 
+*/

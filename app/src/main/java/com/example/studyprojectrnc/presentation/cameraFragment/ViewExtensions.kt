@@ -1,5 +1,5 @@
 /*
-package com.example.studyprojectrnc.presentation
+package com.example.studyprojectrnc.presentation.cameraFragment
 
 import android.os.Build
 import android.view.DisplayCutout
@@ -16,7 +16,6 @@ const val FLAGS_FULLSCREEN =
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-
 
 const val ANIMATION_FAST_MILLIS = 50L
 const val ANIMATION_SLOW_MILLIS = 100L
@@ -49,11 +48,15 @@ fun View.padWithDisplayCutout() {
 }
 
 fun AlertDialog.showImmersive() {
+
     window?.setFlags(
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+
     window?.decorView?.systemUiVisibility = FLAGS_FULLSCREEN
+
     show()
+
     window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
 }
 */

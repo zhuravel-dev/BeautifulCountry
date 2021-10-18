@@ -1,5 +1,5 @@
 /*
-package com.example.studyprojectrnc.presentation
+package com.example.studyprojectrnc.presentation.cameraFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.studyprojectrnc.R
-import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
-@AndroidEntryPoint
 class PhotoFragment internal constructor() : Fragment() {
 
     override fun onCreateView(
