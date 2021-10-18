@@ -6,7 +6,7 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 31

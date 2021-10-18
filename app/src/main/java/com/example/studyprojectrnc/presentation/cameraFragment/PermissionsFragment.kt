@@ -1,4 +1,3 @@
-/*
 package com.example.studyprojectrnc.presentation.cameraFragment
 
 import android.Manifest
@@ -34,7 +33,6 @@ class PermissionsFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSIONS_REQUEST_CODE) {
             if (PackageManager.PERMISSION_GRANTED == grantResults.firstOrNull()) {
-                // Take the user to the success fragment when permission is granted
                 Toast.makeText(context, "Permission request granted", Toast.LENGTH_LONG).show()
                 navigateToCamera()
             } else {
@@ -57,4 +55,3 @@ class PermissionsFragment : Fragment() {
         }
     }
 }
-*/

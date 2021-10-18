@@ -1,4 +1,3 @@
-/*
 package com.example.studyprojectrnc.presentation.cameraFragment
 
 import android.os.Build
@@ -59,4 +58,3 @@ fun AlertDialog.showImmersive() {
 
     window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
 }
-*/

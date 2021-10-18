@@ -1,4 +1,3 @@
-/*
 package com.example.studyprojectrnc.presentation.cameraFragment
 
 import android.content.Intent
@@ -24,27 +23,16 @@ import java.util.*
 
 val EXTENSION_WHITELIST = arrayOf("JPG")
 
-*/
-/** Fragment used to present the user with a gallery of photos taken *//*
-
 class GalleryFragment internal constructor() : Fragment() {
 
-    */
-/** Android ViewBinding *//*
 
     private var _fragmentGalleryBinding: FragmentGalleryBinding? = null
 
     private val fragmentGalleryBinding get() = _fragmentGalleryBinding!!
 
-    */
-/** AndroidX navigation arguments *//*
-
     private val args: GalleryFragmentArgs by navArgs()
 
     private lateinit var mediaList: MutableList<File>
-
-    */
-/** Adapter class used to present a fragment containing one photo or video as a page *//*
 
     inner class MediaPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getCount(): Int = mediaList.size
@@ -151,4 +139,4 @@ class GalleryFragment internal constructor() : Fragment() {
         _fragmentGalleryBinding = null
         super.onDestroyView()
     }
-}*/
+}

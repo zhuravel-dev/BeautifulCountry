@@ -1,4 +1,3 @@
-/*
 package com.example.studyprojectrnc.presentation.cameraFragment
 
 import android.os.Bundle
@@ -34,4 +33,4 @@ class PhotoFragment internal constructor() : Fragment() {
             }
         }
     }
-}*/
+}
