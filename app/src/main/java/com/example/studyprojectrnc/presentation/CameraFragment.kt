@@ -2,21 +2,28 @@
 package com.example.studyprojectrnc.presentation
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.ImageFormat
 import android.graphics.drawable.ColorDrawable
+import android.hardware.camera2.CameraCharacteristics
+import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.camera.camera2.interop.Camera2CameraInfo
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
@@ -32,6 +39,7 @@ import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.CameraUiConteinerBinding
 import com.example.studyprojectrnc.databinding.FragmentCameraBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_camera.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -171,7 +179,6 @@ class CameraFragment : Fragment() {
             }
         }, ContextCompat.getMainExecutor(requireContext()))
     }
-
 
     @RequiresApi(Build.VERSION_CODES.R)
     private fun bindCameraUseCases() {
@@ -325,8 +332,7 @@ class CameraFragment : Fragment() {
     }
 
 
-    */
-/*private fun takePhoto() {
+    private fun takePhoto() {
         val imageCapture = imageCapture ?: return
         val photoFile = File(
             outputDirectory,
@@ -381,11 +387,16 @@ class CameraFragment : Fragment() {
                 Timber.e(exc, "Use case binding failed")
             }
         }, ContextCompat.getMainExecutor(safeContext))
-    }*//*
+    }
 
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        safeContext?.let { it1 -> ContextCompat.checkSelfPermission(it1, it) } == PackageManager.PERMISSION_GRANTED
+        safeContext?.let { it1 ->
+            ContextCompat.checkSelfPermission(
+                it1,
+                it
+            )
+        } == PackageManager.PERMISSION_GRANTED
     }
 
     private fun getOutputDirectory(): File {
@@ -396,8 +407,7 @@ class CameraFragment : Fragment() {
             mediaDir else activity?.filesDir!!
     }
 
-    */
-/*var savePhotosFolder: String
+    var savePhotosFolder: String
         get(): String {
             var path = prefs?.getString(
                 SAVE_PHOTOS, Environment.getExternalStoragePublicDirectory(
@@ -411,8 +421,7 @@ class CameraFragment : Fragment() {
             }
             return path!!
         }
-        set(path) = prefs?.edit()?.putString(SAVE_PHOTOS, path)!!.apply()*//*
-
+        set(path) = prefs?.edit()?.putString(SAVE_PHOTOS, path)!!.apply()
 
 
     private fun Context.getSharedPrefs(): SharedPreferences =
@@ -491,6 +500,4 @@ class CameraFragment : Fragment() {
                     .format(System.currentTimeMillis()) + extension
             )
     }
-}
-
-*/
+}*/

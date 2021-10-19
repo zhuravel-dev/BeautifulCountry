@@ -1,7 +1,7 @@
-/*
 package com.example.studyprojectrnc.presentation
 
 import android.media.MediaScannerConnection
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.*
 
+
 val EXTENSION_WHITELIST = arrayOf("JPG")
 
 @AndroidEntryPoint
@@ -27,7 +28,7 @@ class GalleryFragment internal constructor() : Fragment() {
 
     private val fragmentGalleryBinding get() = _fragmentGalleryBinding!!
 
-    private val args: GalleryFragmentArgs by navArgs()
+    private val args: CameraXArgs by navArgs()
 
     private lateinit var mediaList: MutableList<File>
 
@@ -71,7 +72,9 @@ class GalleryFragment internal constructor() : Fragment() {
             adapter = MediaPagerAdapter(childFragmentManager)
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         fragmentGalleryBinding.cutoutSafeArea.padWithDisplayCutout()
+        }
 
         fragmentGalleryBinding.backButton.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigateUp()
@@ -116,4 +119,3 @@ class GalleryFragment internal constructor() : Fragment() {
         super.onDestroyView()
     }
 }
-*/

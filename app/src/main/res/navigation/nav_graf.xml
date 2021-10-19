@@ -27,7 +27,7 @@
         android:label="SecondFragment" />
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.example.studyprojectrnc.presentation.cameraFragment.CameraFragment"
+        android:name="com.example.studyprojectrnc.presentation.CameraX"
         android:label="CameraFragment" >
         <action
             android:id="@+id/action_cameraFragment_to_galleryFragment"
@@ -51,7 +51,7 @@
         android:label="AnimationFragment" />
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="com.example.studyprojectrnc.presentation.cameraFragment.CameraFragment"
+        android:name="com.example.studyprojectrnc.presentation.CameraX"
         android:label="GalleryFragment" >
         <argument
             android:name="root_directory"
