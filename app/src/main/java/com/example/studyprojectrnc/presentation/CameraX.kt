@@ -60,6 +60,20 @@ class CameraX : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (allPermissionsGranted()) {
             startCamera()
+            outputDirectory = getOutputDirectory()
+            fragmentCameraBinding?.fabAddPhoto?.setOnClickListener {
+                takePhoto()
+                Timber.i("Click on TakePhoto")
+            }
+            fragmentCameraBinding?.photoViewButton?.setOnClickListener {
+                if (true == outputDirectory?.listFiles()?.isNotEmpty()) {
+                    Navigation.findNavController(
+                        requireActivity(), R.id.nav_host_fragment
+                    ).navigate(CameraXDirections
+                        .actionCameraFragmentToGalleryFragment(outputDirectory!!.absolutePath))
+                }
+            }
+            setupSwitch()
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -67,14 +81,6 @@ class CameraX : Fragment() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-
-        fragmentCameraBinding?.fabAddPhoto?.setOnClickListener {
-            takePhoto()
-            Timber.i("Click on TakePhoto")
-        }
-        loadLatestPhotoForGalleryThumbnail()
-        setupSwitch()
-        outputDirectory = getOutputDirectory()
     }
 
     private fun startCamera() {
@@ -116,10 +122,7 @@ class CameraX : Fragment() {
     }
 
     private fun takePhoto() {
-        val photoFile = File(
-            outputDirectory, SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-                .format(System.currentTimeMillis()) + ".jpg"
-        )
+        val photoFile = File(outputDirectory, "${System.currentTimeMillis()}.jpg")
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
@@ -127,7 +130,6 @@ class CameraX : Fragment() {
             outputOptions,
             ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
-
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
                     val msg = "Photo capture succeeded: $savedUri"
@@ -143,11 +145,11 @@ class CameraX : Fragment() {
     }
 
     private fun getOutputDirectory(): File {
-        val mediaDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.let {
+        val mediaDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_DCIM)?.let {
             File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
         }
         return if (mediaDir != null && mediaDir.exists()) mediaDir
-        else requireActivity().filesDir
+        else requireContext().filesDir
     }
 
 
@@ -189,96 +191,12 @@ class CameraX : Fragment() {
     }
 
     private fun setGalleryThumbnail(uri: Uri) {
-
-        fragmentCameraBinding?.photoViewButton?.let { photoViewButton ->
-            photoViewButton.post {
-                photoViewButton.setPadding(resources.getDimension(R.dimen.stroke_small).toInt())
-
-                Glide.with(photoViewButton)
+        fragmentCameraBinding?.photoViewButton?.let {
+                Glide.with(requireContext())
                     .load(uri)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(photoViewButton)
-            }
+                    .into(it)
         }
-    }
-
-    private fun loadLatestPhotoForGalleryThumbnail() {
-        fragmentCameraBinding?.root.let {
-            fragmentCameraBinding?.root?.removeView(it)
-        }
-
-        fragmentCameraBinding = FragmentCameraBinding.inflate(
-            LayoutInflater.from(requireContext()),
-            fragmentCameraBinding?.root,
-            true
-        )
-
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            outputDirectory?.listFiles { file ->
-                EXTENSION_WHITELIST.contains(file.extension.toUpperCase(Locale.ROOT))
-            }?.maxOrNull()?.let {
-                setGalleryThumbnail(Uri.fromFile(it))
-            }
-        }
-
-        fragmentCameraBinding?.fabAddPhoto?.setOnClickListener {
-
-            imageCapture.let { imageCapture ->
-
-                val photoFile = createFile(outputDirectory!!, FILENAME, PHOTO_EXTENSION)
-                val metadata = ImageCapture.Metadata().apply {
-
-                    // Mirror image when using the front camera
-                    isReversedHorizontal = lensFacing == CameraSelector.LENS_FACING_FRONT
-                }
-
-                val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile)
-                    .setMetadata(metadata)
-                    .build()
-
-
-                imageCapture.takePicture(
-                    outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
-
-                        override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                            val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
-                            Timber.e("Photo capture succeeded: $savedUri")
-                            setGalleryThumbnail(savedUri)
-                        }
-
-                        override fun onError(exception: ImageCaptureException) {
-                            Timber.e("Photo capture failed: ${exception.message}")
-                        }
-                    })
-            }
-        }
-
-        // Listener for button used to view the most recent photo
-        fragmentCameraBinding?.photoViewButton?.setOnClickListener {
-            if (true == outputDirectory?.listFiles()?.isNotEmpty()) {
-                Navigation.findNavController(
-                    requireActivity(), R.id.nav_host_fragment
-                ).navigate(CameraXDirections
-                    .actionCameraFragmentToGalleryFragment(outputDirectory!!.absolutePath))
-            }
-        }
-    }
-
-    private fun updateCameraSwitchButton() {
-        try {
-            fragmentCameraBinding?.fabSwitch?.isEnabled = hasBackCamera() && hasFrontCamera()
-        } catch (exception: CameraInfoUnavailableException) {
-            fragmentCameraBinding?.fabSwitch?.isEnabled = false
-        }
-    }
-
-    private fun hasBackCamera(): Boolean {
-        return cameraProvider?.hasCamera(CameraSelector.DEFAULT_BACK_CAMERA) ?: false
-    }
-
-    private fun hasFrontCamera(): Boolean {
-        return cameraProvider?.hasCamera(CameraSelector.DEFAULT_FRONT_CAMERA) ?: false
     }
 
     companion object {
