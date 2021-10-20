@@ -19,7 +19,7 @@
         <shape android:shape="oval">
             <stroke
                 android:width="4dp"
-                android:color="@color/icPressed" />
+                android:color="@color/colorAccent" />
             <size
                 android:width="64dp"
                 android:height="64dp" />
@@ -29,7 +29,7 @@
         <shape android:shape="oval">
             <stroke
                 android:width="4dp"
-                android:color="@color/icFocused" />
+                android:color="@color/colorAccent" />
             <size
                 android:width="64dp"
                 android:height="64dp" />
@@ -39,7 +39,7 @@
         <shape android:shape="oval">
             <stroke
                 android:width="4dp"
-                android:color="@color/icActive" />
+                android:color="@color/colorAccent" />
             <size
                 android:width="64dp"
                 android:height="64dp" />

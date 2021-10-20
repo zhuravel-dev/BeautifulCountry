@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentSecondBinding
 import com.example.studyprojectrnc.domain.DataState

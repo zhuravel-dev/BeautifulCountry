@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.presentation
+package com.example.studyprojectrnc.presentation.camera
 
 import android.media.MediaScannerConnection
 import android.os.Build
@@ -14,10 +14,11 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentGalleryBinding
+import com.example.studyprojectrnc.presentation.padWithDisplayCutout
+import com.example.studyprojectrnc.presentation.showImmersive
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.*
-
 
 val EXTENSION_WHITELIST = arrayOf("JPG")
 
@@ -28,7 +29,7 @@ class GalleryFragment internal constructor() : Fragment() {
 
     private val fragmentGalleryBinding get() = _fragmentGalleryBinding!!
 
-    private val args: CameraXArgs by navArgs()
+    private val args: GalleryFragmentArgs by navArgs()
 
     private lateinit var mediaList: MutableList<File>
 
@@ -73,7 +74,7 @@ class GalleryFragment internal constructor() : Fragment() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-        fragmentGalleryBinding.cutoutSafeArea.padWithDisplayCutout()
+            fragmentGalleryBinding.cutoutSafeArea.padWithDisplayCutout()
         }
 
         fragmentGalleryBinding.backButton.setOnClickListener {

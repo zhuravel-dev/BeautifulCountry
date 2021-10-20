@@ -1,31 +1,29 @@
-package com.example.studyprojectrnc.presentation
+package com.example.studyprojectrnc.presentation.camera
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.Telephony.Mms.Part.FILENAME
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentCameraBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
@@ -41,7 +39,6 @@ class CameraX : Fragment() {
     private var cameraExecutor = Executors.newSingleThreadExecutor()
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraSelectorOption = CameraSelector.LENS_FACING_BACK
-    private var lensFacing: Int = CameraSelector.LENS_FACING_BACK
     private val imageCapture by lazy {
         ImageCapture.Builder()
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
@@ -69,8 +66,11 @@ class CameraX : Fragment() {
                 if (true == outputDirectory?.listFiles()?.isNotEmpty()) {
                     Navigation.findNavController(
                         requireActivity(), R.id.nav_host_fragment
-                    ).navigate(CameraXDirections
-                        .actionCameraFragmentToGalleryFragment(outputDirectory!!.absolutePath))
+                    ).navigate(
+                        CameraXDirections.actionCameraFragmentToGalleryFragment(
+                            outputDirectory!!.absolutePath
+                        )
+                    )
                 }
             }
             setupSwitch()
@@ -191,20 +191,20 @@ class CameraX : Fragment() {
     }
 
     private fun setGalleryThumbnail(uri: Uri) {
-        fragmentCameraBinding?.photoViewButton?.let {
+        fragmentCameraBinding?.photoViewButton?.let { photoViewButton ->
+            photoViewButton.post {
+                photoViewButton.setPadding(resources.getDimension(R.dimen.stroke_small).toInt())
                 Glide.with(requireContext())
                     .load(uri)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(it)
+                    .into(photoViewButton)
+            }
         }
     }
 
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 10
-        val EXTENSION_WHITELIST = arrayOf("JPG")
-        private const val PHOTO_EXTENSION = ".jpg"
 
         /** Helper function used to create a timestamped file */
         private fun createFile(baseFolder: File, format: String, extension: String) =

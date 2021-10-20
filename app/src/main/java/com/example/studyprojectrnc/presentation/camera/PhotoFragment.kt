@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.presentation
+package com.example.studyprojectrnc.presentation.camera
 
 import android.os.Bundle
 import android.view.LayoutInflater
