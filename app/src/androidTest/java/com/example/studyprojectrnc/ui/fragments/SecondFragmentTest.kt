@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.ui
+package com.example.studyprojectrnc.ui.fragments
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -13,15 +13,15 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityUITests {
+class SecondFragmentTest {
 
     @get:Rule
     var activityRule: ActivityScenarioRule<MainActivity> =
         ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun chekActivityVisibility() {
-        onView(withId(R.id.layout_mainActivity))
+    fun checkSecondFragmentVisibility() {
+        onView(withId(R.id.layout_secondFragment))
             .check(matches(isDisplayed()))
     }
 }

@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <DatePicker
-        android:id="@+id/tvDatePicker"
+        android:id="@+id/dataPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="72dp"
@@ -42,7 +42,7 @@
         android:contentDescription="@string/desc"
         android:src="@drawable/ic_location"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvDatePicker" />
+        app:layout_constraintStart_toStartOf="@+id/dataPicker" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnMap"
@@ -86,7 +86,7 @@
         android:contentDescription="@string/desc"
         android:src="@drawable/ic_navigate_next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvDatePicker"
+        app:layout_constraintEnd_toEndOf="@+id/dataPicker"
         app:layout_constraintStart_toEndOf="@+id/btnCamera" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

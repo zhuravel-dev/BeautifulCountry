@@ -19,9 +19,8 @@ class BluetoothFragmentTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun chekFirstFragmentVisibility() {
+    fun checkFirstFragmentVisibility() {
         onView(ViewMatchers.withId(R.id.layout_bluetoothFragment))
             .check(matches(ViewMatchers.isDisplayed()))
-
     }
 }

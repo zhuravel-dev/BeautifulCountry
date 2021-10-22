@@ -62,7 +62,7 @@ class CameraX : Fragment() {
                 takePhoto()
                 Timber.i("Click on TakePhoto")
             }
-            fragmentCameraBinding?.photoViewButton?.setOnClickListener {
+            fragmentCameraBinding?.ibGallery?.setOnClickListener {
                 if (true == outputDirectory?.listFiles()?.isNotEmpty()) {
                     Navigation.findNavController(
                         requireActivity(), R.id.nav_host_fragment
@@ -191,7 +191,7 @@ class CameraX : Fragment() {
     }
 
     private fun setGalleryThumbnail(uri: Uri) {
-        fragmentCameraBinding?.photoViewButton?.let { photoViewButton ->
+        fragmentCameraBinding?.ibGallery?.let { photoViewButton ->
             photoViewButton.post {
                 photoViewButton.setPadding(resources.getDimension(R.dimen.stroke_small).toInt())
                 Glide.with(requireContext())

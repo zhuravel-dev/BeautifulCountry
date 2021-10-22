@@ -41,7 +41,6 @@
     <string name="connect">Connect</string>
     <string name="Error">Error</string>
     <string name="Nothing_to_show">Nothing to show!</string>
-
     <string name="capture_button_alt">Capture</string>
     <string name="switch_camera_button_alt">Switch camera</string>
     <string name="gallery_button_alt">Gallery</string>
@@ -54,4 +53,6 @@
     <string name="delete_button_alt">Delete</string>
     <string name="delete_dialog">Delete current photo?</string>
     <string name="delete_title">Confirm</string>
+    <string name="cameraBtn">cameraBtn</string>
+    <string name="ibgallery">ibGallery</string>
 </resources>

@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,20 +14,23 @@
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
     <uses-feature android:name="android.hardware.camera.any" />
-    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <uses-feature
         android:name="android.hardware.bluetooth"
         android:required="true" />
 
     <application
+        android:exported="true"
+        tools:node="merge"
         android:name=".presentation.BeautifulCountryApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
@@ -38,17 +40,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
+            android:exported="true"
+            tools:node="merge"
             android:name=".services.BackgroundSoundService"
-            android:enabled="true"
-            android:exported="true" />
+            android:enabled="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".presentation.SplashActivity"
             android:exported="true"
+            tools:node="merge"
+            android:name=".presentation.SplashActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,26 +61,10 @@
         </activity>
 
         <activity
+            android:exported="true"
+            tools:node="merge"
             android:name=".presentation.MainActivity"
-            android:windowSoftInputMode="adjustResize"/>
-
-        <!--<receiver
-            android:name=".services.RestartBackgroundService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="restartservice" />
-            </intent-filter>
-
-            &lt;!&ndash; Register as a system camera app &ndash;&gt;
-            <intent-filter>
-                <action android:name="android.media.action.IMAGE_CAPTURE" />
-                <action android:name="android.media.action.STILL_IMAGE_CAMERA"/>
-                <action android:name="android.media.action.VIDEO_CAMERA" />
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-
-        </receiver>-->
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 </manifest>
