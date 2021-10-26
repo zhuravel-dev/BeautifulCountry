@@ -1,4 +1,4 @@
-package com.example.studyprojectrnc.presentation
+package com.example.studyprojectrnc.presentation.camera
 
 import android.os.Build
 import android.view.DisplayCutout

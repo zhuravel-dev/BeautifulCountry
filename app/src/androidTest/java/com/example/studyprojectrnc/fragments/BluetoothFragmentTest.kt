@@ -1,9 +1,9 @@
-package com.example.studyprojectrnc.ui.fragments
+package com.example.studyprojectrnc.fragments
 
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.studyprojectrnc.R
@@ -13,15 +13,18 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SecondFragmentTest {
+class BluetoothFragmentTest {
 
     @get:Rule
     var activityRule: ActivityScenarioRule<MainActivity> =
         ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun checkSecondFragmentVisibility() {
-        onView(withId(R.id.layout_secondFragment))
-            .check(matches(isDisplayed()))
+    fun checkBluetoothFragmentVisibility() {
+
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        onView(ViewMatchers.withId(R.id.layout_bluetoothFragment))
+            .check(matches(ViewMatchers.isDisplayed()))
     }
 }

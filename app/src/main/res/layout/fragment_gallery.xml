@@ -18,7 +18,7 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:id="@+id/back_button"
+            android:id="@+id/btnBackFromGalleryToCamera"
             android:layout_width="@dimen/round_button_small"
             android:layout_height="@dimen/round_button_small"
             android:layout_marginStart="@dimen/margin_xsmall"

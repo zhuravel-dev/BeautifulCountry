@@ -11,7 +11,6 @@ import com.example.studyprojectrnc.R
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
-@AndroidEntryPoint
 class PhotoFragment internal constructor() : Fragment() {
 
     override fun onCreateView(

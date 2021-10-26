@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import com.example.studyprojectrnc.R
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class BluetoothFragment : Fragment() {
 
     private var mBtAdapter: BluetoothAdapter? = null

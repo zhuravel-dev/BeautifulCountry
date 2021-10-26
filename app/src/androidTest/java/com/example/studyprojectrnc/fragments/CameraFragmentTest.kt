@@ -1,13 +1,18 @@
-package com.example.studyprojectrnc.ui.fragments
+package com.example.studyprojectrnc.fragments
 
+import androidx.fragment.app.testing.FragmentScenario
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.presentation.MainActivity
+import com.example.studyprojectrnc.presentation.camera.CameraX
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +24,17 @@ class CameraFragmentTest {
     @get:Rule
     var activityRule: ActivityScenarioRule<MainActivity> =
         ActivityScenarioRule(MainActivity::class.java)
+
+    @Test
+    @Before
+    fun init() {
+        FragmentScenario.Companion.launchInContainer(
+            CameraX::class.java,
+            null,
+            R.style.AppTheme,
+            null
+        )
+    }
 
     @Test
     fun checkCameraFragmentVisibility() {
@@ -52,21 +68,19 @@ class CameraFragmentTest {
 
     @Test
     fun checkClickOnCameraBtn() {
+
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
         onView(withId(R.id.btnCamera))
             .perform(click())
     }
 
     @Test
     fun checkClickOnGalleryBtn() {
-        onView(withId(R.id.ibGallery))
-            .perform(click())
-    }
-    @Test
-    fun checkNavigateToGalleryFragment() {
-        onView(withId(R.id.ibGallery))
-            .perform(click())
 
-        onView(withId(R.id.layout_gallery))
-            .check(matches(isDisplayed()))
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        onView(withId(R.id.ibGallery))
+            .perform(click())
     }
 }

@@ -14,15 +14,11 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentGalleryBinding
-import com.example.studyprojectrnc.presentation.padWithDisplayCutout
-import com.example.studyprojectrnc.presentation.showImmersive
-import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.*
 
 val EXTENSION_WHITELIST = arrayOf("JPG")
 
-@AndroidEntryPoint
 class GalleryFragment internal constructor() : Fragment() {
 
     private var _fragmentGalleryBinding: FragmentGalleryBinding? = null
@@ -77,7 +73,7 @@ class GalleryFragment internal constructor() : Fragment() {
             fragmentGalleryBinding.cutoutSafeArea.padWithDisplayCutout()
         }
 
-        fragmentGalleryBinding.backButton.setOnClickListener {
+        fragmentGalleryBinding.btnBackFromGalleryToCamera.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigateUp()
         }
 

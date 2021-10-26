@@ -30,7 +30,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
 
-@AndroidEntryPoint
 class CameraX : Fragment() {
 
     private var fragmentCameraBinding: FragmentCameraBinding? = null
