@@ -1,7 +1,6 @@
 package com.example.studyprojectrnc.fragments
 
 import androidx.fragment.app.testing.FragmentScenario
-import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -10,7 +9,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.presentation.MainActivity
-import com.example.studyprojectrnc.presentation.camera.CameraX
 import com.example.studyprojectrnc.presentation.secondScreen.SecondFragment
 import org.junit.Before
 import org.junit.Rule

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import com.example.studyprojectrnc.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import timber.log.Timber
@@ -21,9 +20,7 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*val navHostFragment = parentFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController*/
-        val navController = Navigation.findNavController(requireView())
+        val navController by lazy { Navigation.findNavController(requireView()) }
 
         val buttonNext = view.findViewById<FloatingActionButton>(R.id.btnNext)
         buttonNext.setOnClickListener {

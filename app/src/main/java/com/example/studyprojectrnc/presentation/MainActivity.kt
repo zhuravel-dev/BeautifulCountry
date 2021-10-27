@@ -3,6 +3,8 @@ package com.example.studyprojectrnc.presentation
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

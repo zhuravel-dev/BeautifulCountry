@@ -23,14 +23,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.databinding.FragmentCameraBinding
-import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
 
-class CameraX : Fragment() {
+class CameraFragment : Fragment() {
 
     private var fragmentCameraBinding: FragmentCameraBinding? = null
 
@@ -66,7 +65,7 @@ class CameraX : Fragment() {
                     Navigation.findNavController(
                         requireActivity(), R.id.nav_host_fragment
                     ).navigate(
-                        CameraXDirections.actionCameraFragmentToGalleryFragment(
+                        CameraFragmentDirections.actionCameraFragmentToGalleryFragment(
                             outputDirectory!!.absolutePath
                         )
                     )
