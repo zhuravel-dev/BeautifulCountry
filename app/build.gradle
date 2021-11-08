@@ -35,7 +35,8 @@ android {
         buildConfigField "String", "imageType", "\"photo\""
         buildConfigField "String", "PREF_NAME", "\"AppPreferences\""
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+       // testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.studyprojectrnc.MyTestHiltRunner"
     }
 
     buildTypes {
@@ -58,6 +59,10 @@ android {
 
 realm {
     syncEnabled = true
+}
+
+configurations.all {
+    resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.0'
 }
 
 
@@ -95,29 +100,24 @@ dependencies {
     androidTestImplementation "androidx.test:runner:1.4.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
 
-    // Timber, Firebase, Crashlytics
-    implementation "com.jakewharton.timber:timber:4.7.1"
+    // Firebase, Crashlytics
     implementation "com.google.firebase:firebase-crashlytics-ktx"
     implementation "com.google.firebase:firebase-analytics-ktx"
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:4.7.1"
 
     // DI - Dagger, Hilt
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.38.1"
 
-    // Camera
+    // Camera - Using the first version on purpose
     implementation "androidx.camera:camera-camera2:1.0.0"
     implementation 'androidx.camera:camera-view:1.0.0-alpha24'
     implementation 'androidx.camera:camera-lifecycle:1.0.0'
-
     implementation "androidx.camera:camera-core:1.0.0-alpha10"
     implementation 'androidx.camera:camera-extensions:1.0.0-alpha10'
-
-   /* implementation "androidx.camera:camera-camera2:1.0.2"
-    implementation "androidx.camera:camera-core:1.0.0-alpha10"
-    implementation "androidx.camera:camera-view:1.0.0-alpha10"
-    implementation "androidx.camera:camera-lifecycle:1.0.2"
-    implementation 'androidx.camera:camera-extensions:1.0.0-alpha10'*/
 
     // Sliding pane layout
     implementation "androidx.slidingpanelayout:slidingpanelayout:1.2.0-beta01"
@@ -177,6 +177,15 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
 
     debugImplementation("androidx.fragment:fragment-testing:1.3.6") {
-        exclude group: "androidx.test", module : "core"
+        exclude group: "androidx.test", module: "core"
     }
+
+    // Testing Hilt
+    def fragment_version = "1.3.0-alpha06"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.38.1'
+    androidTestImplementation "com.google.dagger:hilt-android-testing:2.38.1"
+    def test_version = "1.4.0"
+    androidTestImplementation "androidx.test:core-ktx:$test_version"
+
 }
