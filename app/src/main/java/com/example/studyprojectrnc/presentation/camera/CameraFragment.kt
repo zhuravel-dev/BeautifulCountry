@@ -32,7 +32,6 @@ import java.util.concurrent.Executors
 class CameraFragment : Fragment() {
 
     private var fragmentCameraBinding: FragmentCameraBinding? = null
-
     private var outputDirectory: File? = null
     private var cameraExecutor = Executors.newSingleThreadExecutor()
     private var cameraProvider: ProcessCameraProvider? = null
@@ -81,7 +80,7 @@ class CameraFragment : Fragment() {
         }
     }
 
-    private fun startCamera() {
+     fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener(
             {

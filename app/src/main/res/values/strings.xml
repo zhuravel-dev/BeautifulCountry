@@ -1,4 +1,5 @@
 <resources>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAXYdK08B5KB5SBOfHSuaByLSz1aOpMqtA</string>
     <string name="app_name">Beautiful Country: Australia</string>
     <string name="welcome">Hello! Today is:</string>
     <string name="txtNeedBiometric">Click button for authentication!</string>

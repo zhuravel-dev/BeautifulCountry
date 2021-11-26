@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class ImagesRepositoryImpl @Inject constructor(private val api: ImagesServiceRetrofit):
+data class ImagesRepositoryImpl @Inject constructor(private val api: ImagesServiceRetrofit):
     ImagesRepository {
     private var pageNumber = 0
 
@@ -32,3 +32,4 @@ class ImagesRepositoryImpl @Inject constructor(private val api: ImagesServiceRet
         }
     }
 }
+

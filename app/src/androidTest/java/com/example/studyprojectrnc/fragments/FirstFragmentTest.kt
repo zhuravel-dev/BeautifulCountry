@@ -17,12 +17,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class FirstFragmentTest {
 
-    @get:Rule
-    var activityRule: ActivityScenarioRule<MainActivity> =
-        ActivityScenarioRule(MainActivity::class.java)
-
-    @Test
-    @Before
     fun init() {
         FragmentScenario.Companion.launchInContainer(
             FirstFragment::class.java,
@@ -31,6 +25,10 @@ class FirstFragmentTest {
             null
         )
     }
+
+    @get:Rule
+    var activityRule: ActivityScenarioRule<MainActivity> =
+        ActivityScenarioRule(MainActivity::class.java)
 
     @Test
     fun checkFirstFragmentVisibility() {
