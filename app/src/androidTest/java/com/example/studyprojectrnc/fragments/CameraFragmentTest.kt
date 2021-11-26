@@ -4,6 +4,7 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -11,6 +12,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.studyprojectrnc.R
 import com.example.studyprojectrnc.presentation.MainActivity
 import com.example.studyprojectrnc.presentation.camera.CameraFragment
+import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.not
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,7 +41,7 @@ class CameraFragmentTest {
 
     @Test
     fun checkCameraBtnVisibility() {
-       onView(withId(R.id.fabAddPhoto))
+        onView(withId(R.id.fabAddPhoto))
             .check(matches(isDisplayed()))
     }
 
@@ -80,4 +83,13 @@ class CameraFragmentTest {
         onView(withId(R.id.ibGallery))
             .perform(click())
     }
+
+   /* @Test
+    fun thumbnailIsNotDrawn() {
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        onView(withId(R.id.previewView)).check(doesNotExist())
+
+    }*/
+
 }
